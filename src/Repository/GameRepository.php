@@ -59,4 +59,10 @@ class GameRepository extends ServiceEntityRepository
         ;
 
     }
+
+    public function getMostBoughtGames(int $limit = 9) {
+
+        return $this->createQueryBuilder('g')
+            ->join(Library::class, )
+    }
 }
