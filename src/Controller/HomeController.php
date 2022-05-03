@@ -14,10 +14,12 @@ class HomeController extends AbstractController
     public function index(GameRepository $gameRepository, CommentRepository $commentRepository): Response
     {
         $lastPublishedGames = $gameRepository->getGamesByDate();
+        $mostPlayedGames = $gameRepository->getMostPlayedGames();
         $lastPostedComments = $commentRepository->getLastPostedComments();
 
         return $this->render('home/index.html.twig', [
             'lastPublishedGames' => $lastPublishedGames,
+            'mostPlayedGames' => $mostPlayedGames,
             'lastPostedComments' => $lastPostedComments
         ]);
     }
