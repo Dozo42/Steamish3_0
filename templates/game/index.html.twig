@@ -13,7 +13,10 @@
             <div class="container-image">
                 <img class="img-fluid" src="{{game.thumbnailCover}}" alt="{{game.name}}">
             </div>
-            <h3 class="mt-1"><b>{{game.name}}</b></h3>
+            <div class="d-flex justify-content-between mt-1">
+                <h3>{{game.name}}</h3>
+                <h3>{{game.price}}€</h3>
+            </div>
         </div>
         {% endfor %}
 
