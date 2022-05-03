@@ -39,4 +39,14 @@ class GameRepository extends ServiceEntityRepository
         ->setMaxResults(9)
         ->getQuery()->getResult();
     }
+
+    public function getMostPlayedGames() {
+        /* SELECT game.*, SUM(library.game_time) FROM `game` 
+        JOIN library ON library.game_id = game.id
+        GROUP BY game.id
+        ORDER BY SUM(library.game_time) DESC
+        LIMIT 9 */
+        
+
+    }
 }

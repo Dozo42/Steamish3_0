@@ -4,7 +4,10 @@
 {% block body %}
 
     <div class="container mt-5">
-        <h1 class="mb-4">Les dernières sorties</h1>
+        <div class="d-flex justify-content-between align-items-center">
+            <h1 class="mb-4">Les dernières sorties</h1>
+            <div><a class="btn btn-sm btn-primary" href="{{path('app_game')}}">Tout voir</a></div>
+        </div>
         <div class="row">
             {% for game in lastPublishedGames %}
                 {% include "common/_cardGame.html.twig" %}
