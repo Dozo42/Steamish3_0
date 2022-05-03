@@ -32,4 +32,12 @@ class GameRepository extends ServiceEntityRepository
             $this->_em->flush();
         }
     }
+
+    public function getAllGamesByDate() 
+    {
+        return $this->createQueryBuilder('g')
+        ->orderBy('g.publishedAt', 'desc')
+        ->setMaxResults(9)
+        ->getQuery()->getResult();
+    }
 }
