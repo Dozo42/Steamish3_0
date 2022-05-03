@@ -1,9 +1,11 @@
 <div class="col-lg-4 col-md-6 mb-4 cardgame">
-    <div class="container-image">
-        <img class="img-fluid" src="{{game.thumbnailCover}}" alt="{{game.name}}">
-    </div>
+    <a href="{{path('app_one_game', {'slug': game.slug })}}">
+        <div class="container-image">
+           <img class="img-fluid" src="{{game.thumbnailCover}}" alt="{{game.name}}">
+        </div>
+    </a>
     <div class="d-flex justify-content-between">
         <h3 class="mt-1">{{game.name}}</h3>
-        <h2>{{game.price}}€</h2>
+        <h2 class="h4">{{game.price}}€</h2>
     </div>
 </div>
