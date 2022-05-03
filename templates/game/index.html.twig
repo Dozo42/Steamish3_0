@@ -3,13 +3,14 @@
 {% block title %}Hello GameController!{% endblock %}
 
 {% block body %}
-    <div class="card" style="width: 18rem;">
-        <img src="..." class="card-img-top" alt="...">
-        <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
-                content.</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
-        </div>
+{% for game in games %}
+<div class="col-lg-3 col-md-6 mb-5 cardgame">
+    <div class="container-image">
+        <img class="img-fluid" src="{{game.thumbnailCover}}" alt="{{game.name}}">
+
     </div>
+    <h3 class="cardgame-title"><b>{{game.name}}</b></h3>
+{% endfor %}
+</div>
+
 {% endblock %}
