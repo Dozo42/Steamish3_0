@@ -33,8 +33,7 @@ class GameRepository extends ServiceEntityRepository
         }
     }
 
-    public function getAllGamesByDate() 
-    {
+    public function getGamesByDate() {
         return $this->createQueryBuilder('g')
         ->orderBy('g.publishedAt', 'desc')
         ->setMaxResults(9)

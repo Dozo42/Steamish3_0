@@ -16,7 +16,7 @@ class HomeController extends AbstractController
     #[Route('/', name: 'app_home')]
     public function index(): Response
     {
-        $lastPublishedGames = $this->gameRepository->getAllGamesByDate();
+        $lastPublishedGames = $this->gameRepository->getGamesByDate();
 
         return $this->render('home/index.html.twig', [
             'lastPublishedGames' => $lastPublishedGames
