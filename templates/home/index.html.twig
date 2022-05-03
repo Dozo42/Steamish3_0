@@ -36,7 +36,7 @@
                 <div class="cardcomment d-flex flex-column p-2 justify-content-center">
                     <h5>{{comment.game.name}}</h5>
                     <p>{{ comment.content|length > 75 ? comment.content|slice(0, 75) ~ '...' : comment.content  }}</p>
-                    <p>{{ comment.createdAt|date("m/d/Y") ~ ' par ' ~ comment.account.nickname }}</p>
+                    <p>Le {{ comment.createdAt|date("m F Y") ~ ' par ' ~ comment.account.nickname }}</p>
                 </div>
             {% endfor %}
         </div>
