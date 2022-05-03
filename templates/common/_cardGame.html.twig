@@ -5,7 +5,9 @@
         </div>
     </a>
     <div class="d-flex justify-content-between">
-        <h3 class="mt-1">{{game.name}}</h3>
+        <a href="{{path('app_one_game', {'slug': game.slug })}}">
+            <h3 class="mt-1">{{game.name}}</h3>
+        </a>
         <h2 class="h4">{{game.price}}€</h2>
     </div>
 </div>
