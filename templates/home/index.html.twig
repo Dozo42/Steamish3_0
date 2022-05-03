@@ -15,4 +15,17 @@
         </div>
     </div>
 
+    <div class="comment-section py-4">
+        <div class="container">
+            <h1 class="pb-2">Les derniers commentaires</h1>
+        </div>
+        <div class="d-flex justify-content-evenly">
+            {% for comment in lastPostedComments %}
+                <div class="cardcomment d-flex flex-column">
+                    {{ comment.content|length > 75 ? comment.content|slice(0, 75) ~ '...' : comment.content  }}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
 {% endblock %}

@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\CommentRepository;
 use App\Repository\GameRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -9,17 +10,15 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class HomeController extends AbstractController
 {
-    public function __construct(private GameRepository $gameRepository) {
-        $this->gameRepository = $gameRepository;
-    }
-
     #[Route('/', name: 'app_home')]
-    public function index(): Response
+    public function index(GameRepository $gameRepository, CommentRepository $commentRepository): Response
     {
-        $lastPublishedGames = $this->gameRepository->getGamesByDate();
+        $lastPublishedGames = $gameRepository->getGamesByDate();
+        $lastPostedComments = $commentRepository->getLastPostedComments();
 
         return $this->render('home/index.html.twig', [
-            'lastPublishedGames' => $lastPublishedGames
+            'lastPublishedGames' => $lastPublishedGames,
+            'lastPostedComments' => $lastPostedComments
         ]);
     }
 
