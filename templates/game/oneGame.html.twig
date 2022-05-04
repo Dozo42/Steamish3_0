@@ -45,7 +45,7 @@
 <div class="comment-section pb-4 pt-4">
     <div class="container px-0">
         <div class="row">
-            {% for comment in game.comments %}
+            {% for comment in comments %}
             <div class="col-lg-2 col-md-6 col-sm-6 col-6 p-2">
                 <div class="cardcomment">
                     <div class="ps-3 py-3">
@@ -54,6 +54,7 @@
                         <p>Le {{ comment.createdAt|date("m F Y") ~ ' par '}}<a
                                 href="{{ path('app_user', {'name': comment.account.name}) }}"><b>{{ comment.account.name }}</b></a>
                         </p>
+                        <p>{{ comment.upVotes }}</p>
                     </div>
                 </div>
             </div>
