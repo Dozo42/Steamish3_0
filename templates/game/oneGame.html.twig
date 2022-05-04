@@ -12,7 +12,7 @@
         <div class="col-md-8 view">
             <div class="card-body">
                 <h2 class="card-title">{{ game.name }}</h2>
-                <h5 class="card-text">{{ game.publisher.name }}</h5>
+                <a class="card-text" href=''>{{ game.publisher.name }}</a>
                 <p class="card-text"><small class="text-muted">Publié le {{ game.publishedAt |date("m F Y") }}</small>
                 </p>
                 <h3 class="card-text">Prix {{ game.price }}€</h3>
