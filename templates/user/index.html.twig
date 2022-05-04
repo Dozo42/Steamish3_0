@@ -28,6 +28,27 @@
                         </div>
                     {% endfor %}
                 </div>
+                <hr class="mt-0">
+                <div class="row comment-section">
+                    {% for comment in account.comments %}
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 mb-4">
+                            <div class="cardcomment">
+                                <div class="ps-3 py-3">
+                                    <div class="d-flex align-middle justify-content-between pe-4">
+                                        <p>Le {{ comment.createdAt|date("m F Y")}}</p>
+                                        <div class="d-flex">
+                                            <p><i class="fa-solid fa-circle-up green"></i></p>
+                                            <p>{{ comment.upVotes }}</p>
+                                            <p><i class="fa-solid fa-circle-down red ms-2"></i></p>
+                                            <p>{{ comment.downVotes }}</p>
+                                        </div>
+                                    </div>
+                                    <p class="pe-2">{{ comment.content  }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
             </div>
         </div>    
     </div>
