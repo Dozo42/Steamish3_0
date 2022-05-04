@@ -1,6 +1,10 @@
 .view{
     background-color: $bleuFonce;
 
+    h2{
+        font-size: 3rem;
+    }
+
     h2, h3{
         color: $orange;
     }

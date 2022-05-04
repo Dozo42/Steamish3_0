@@ -72,13 +72,4 @@ class GameRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
-
-    // public function getGamesGenres(){
-    //     return $this->createQueryBuilder('g')
-    //     ->select('g','genre')
-    //     ->join(Genre::class, 'genre', Join::WITH, 'genre.game = g')
-    //     ->getQuery()
-    //     ->getResult()
-    //     ;
-    // }
-}
+ }
