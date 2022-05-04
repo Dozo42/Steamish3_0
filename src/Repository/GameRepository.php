@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Comment;
 use App\Entity\Game;
 use App\Entity\Genre;
 use App\Entity\Library;
@@ -71,5 +72,25 @@ class GameRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult()
         ;
+    }
+
+    public function getGameAllDetails(string $slug): ?Game {
+        return $this->createQueryBuilder('g')
+        ->select('g', 'c', 'ge', 'co', 'p')
+        ->join('g.countries', 'c')
+        ->join('g.genres', 'ge')
+        ->join('g.comments', 'co')
+        ->leftJoin('g.publisher', 'p')
+        ->where('g.slug = :slug')
+        ->setParameter('slug', $slug)
+        ->orderBy('co.createdAt', 'DESC')
+        // join sur les autres entités
+        // leftJoin si nullable
+        // where le slug
+        // orderBy comment.Createat
+        // dans ton twig : game.comments|slice 0,6
+        ->getQuery()
+        ->getOneOrNullResult()
+    ;
     }
  }

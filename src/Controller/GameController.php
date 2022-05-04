@@ -28,12 +28,10 @@ class GameController extends AbstractController
     #[Route('/jeux/{slug}', name: 'app_one_game')]
     public function oneGame($slug = ''): Response 
     {
-        $commentEntity = $this->commentRepository->getLastPostedComments(6);
-        $gameEntity = $this->gameRepository->findOneBy(['slug' => $slug]);
+        $gameEntity = $this->gameRepository->getGameAllDetails($slug);
         // dd($gameEntity);
         return $this->render('game/oneGame.html.twig', [
             'game' => $gameEntity,
-            'comments'=>$commentEntity
         ]);
     }
 }

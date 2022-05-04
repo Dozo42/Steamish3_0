@@ -45,7 +45,7 @@
 <div class="comment-section pb-4 pt-4">
     <div class="container px-0">
         <div class="row">
-            {% for comment in comments %}
+            {% for comment in game.comments|slice(0, 6) %}
             <div class="col-12 p-2">
                 <div class="cardcomment">
                     <div class="ps-3 py-3">
@@ -69,4 +69,7 @@
         </div>
     </div>
 </div>
+
+{# jeux similaires #}
+
 {% endblock %}
