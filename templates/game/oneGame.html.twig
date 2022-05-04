@@ -18,6 +18,9 @@
                 <h3 class="card-text">Prix {{ game.price }}€</h3>
                 <p class="card-text"><small class="text-muted"></small></p>
                 <p class="card-text">{{ game.description | raw }}</p>
+                {# {% for genre in game.genres %}
+                    <p class="card-text">{{ game.genres.name }}</p>
+                {% endfor %} #}
             </div>
         </div>
     </div>
