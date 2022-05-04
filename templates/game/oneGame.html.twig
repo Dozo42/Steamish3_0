@@ -4,23 +4,20 @@
 
 {% block body %}
 
-<div class="card mx-auto m-3 col-10 ">
+<div class="card mx-auto mt-4 mb-4 col-10 border-2 rounded">
     <div class="row g-0">
         <div class="col-md-4 view">
-            <img src="{{ game.thumbnailCover}}" class="img-fluid rounded-start" alt="{{ game.name }}">
+            <img src="{{ game.thumbnailCover}}" class="img-fluid " alt="{{ game.name }}">
         </div>
         <div class="col-md-8 view">
             <div class="card-body">
-                <h3 class="card-title">{{ game.name }}</h3>
+                <h2 class="card-title">{{ game.name }}</h2>
                 <h5 class="card-text">{{ game.publisher.name }}</h5>
-                <div class="d-flex justify-content-between">
-                    <p class="card-text"><small class="text-muted">Publié le:
-                            {{ game.publishedAt |date("m F Y") }}</small></p>
-                    <p class="card-text"><small class="text-muted">Prix: {{ game.price }}€</small></p>
-                </div>
+                <p class="card-text"><small class="text-muted">Publié le {{ game.publishedAt |date("m F Y") }}</small>
+                </p>
+                <h3 class="card-text">Prix {{ game.price }}€</h3>
                 <p class="card-text"><small class="text-muted"></small></p>
-                <p class="card-text">{{ game.description }}</p>
-
+                <p class="card-text">{{ game.description | raw }}</p>
             </div>
         </div>
     </div>
