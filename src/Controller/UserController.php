@@ -19,7 +19,7 @@ class UserController extends AbstractController
     public function show(string $name): Response
     {
         return $this->render('user/index.html.twig', [
-            'account' => $this->accountRepository->findOneBy(['name' => $name])
+            'account' => $this->accountRepository->getAccountAllDetails($name)
         ]);
     }
 }

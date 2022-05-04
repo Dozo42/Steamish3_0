@@ -33,4 +33,17 @@ class AccountRepository extends ServiceEntityRepository
         }
     }
 
+    public function getAccountAllDetails(string $name) {
+
+        return $this->createQueryBuilder('a')
+        ->select('a', 'lib', 'games')
+        ->join('a.libraries', 'lib')
+        ->join('lib.game', 'games')
+        ->where('a.name = :name')
+        ->setParameter('name', $name)
+        ->getQuery()
+        ->getSingleResult()
+        ;
+    }
+
 }

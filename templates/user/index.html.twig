@@ -10,6 +10,21 @@
                 <p class="mb-0"><small class="text-muted">{{ account.nickname }}</small></p> 
                 <p class="mb-0"><small class="text-muted">Inscrit depuis le {{ account.createdAt|date("m F Y") }}</small></p> 
                 <hr>
+                <div class="row">
+                    {% for library in account.libraries %}
+                        <div class="col-6 col-sm-6 col-md-4 col-lg-3 account-library mb-4">
+                            <a href="{{path('app_one_game', {'slug': library.game.slug })}}">
+                                <div class="container-image">
+                                    <img src="{{library.game.thumbnailCover}}" alt="{{library.game.name}}">
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <p class="h4">{{library.gameTime|date('H i s')}}</p>
+                                    <p class="mt-1">{{library.lastUsedAt|date('m F Y')}}</p>
+                                </div>
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
             </div>
         </div>    
     </div>
