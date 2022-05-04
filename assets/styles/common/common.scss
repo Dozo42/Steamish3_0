@@ -2,3 +2,18 @@ body {
   color: $gris;
   background-color: $bleuNuit;
 }
+
+.btn-sm {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.875rem;
+  border-radius: 1rem;
+}
+
+a{
+  color: $orange;
+  text-decoration: none;
+  
+  &:hover{
+      color:$yellow;
+  }
+}

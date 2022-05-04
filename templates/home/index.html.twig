@@ -17,7 +17,7 @@
 
     <div class="container">
         <div class="d-flex justify-content-between align-items-center mb-4">
-            <h1 class="m-0">Les plus joués</h1>
+            <h1 class="m-0 mt-2">Les plus joués</h1>
             <div><a class="btn btn-sm btn-outline-light" href="{{path('app_game')}}"><i class="fa-solid fa-plus"></i></a></div>
         </div>
         <div class="row">
@@ -29,7 +29,7 @@
 
     <div class="comment-section pb-5 pt-4">
         <div class="container">
-            <h1 class="mb-1">Les derniers commentaires</h1>
+            <h1 class="mb-4">Les derniers commentaires</h1>
         </div>
         <div class="d-flex justify-content-evenly">
             {% for comment in lastPostedComments %}
@@ -44,7 +44,7 @@
 
     <div class="container">
         <div class="d-flex justify-content-between align-items-center my-4">
-            <h1 class="m-0">Les plus achetés</h1>
+            <h1 class="m-0 mt-2">Les plus achetés</h1>
             <div><a class="btn btn-sm btn-outline-light" href="{{path('app_game')}}"><i class="fa-solid fa-plus"></i></a></div>
         </div>
         <div class="row">
