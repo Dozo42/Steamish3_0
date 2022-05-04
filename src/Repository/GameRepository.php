@@ -84,13 +84,22 @@ class GameRepository extends ServiceEntityRepository
         ->where('g.slug = :slug')
         ->setParameter('slug', $slug)
         ->orderBy('co.createdAt', 'DESC')
-        // join sur les autres entités
-        // leftJoin si nullable
-        // where le slug
-        // orderBy comment.Createat
-        // dans ton twig : game.comments|slice 0,6
         ->getQuery()
         ->getOneOrNullResult()
     ;
+    }
+
+    public function getSimilarGames(Game $game){
+        return $this->createQueryBuilder('g')
+        ->select('g')
+        ->join('g.genres', 'ge')
+        ->where('ge IN (:genres)')
+        ->setParameter('genres', $game->getGenres())
+        ->andWhere('g != :game')
+        ->setParameter('game', $game)
+        ->orderBy('g.publishedAt', 'DESC')
+        ->getQuery()
+        ->getResult()
+        ;
     }
  }

@@ -29,9 +29,11 @@ class GameController extends AbstractController
     public function oneGame($slug = ''): Response 
     {
         $gameEntity = $this->gameRepository->getGameAllDetails($slug);
+        $similarGames = ($this->gameRepository->getSimilarGames($gameEntity));
         // dd($gameEntity);
         return $this->render('game/oneGame.html.twig', [
             'game' => $gameEntity,
+            'similar'=> $similarGames
         ]);
     }
 }
