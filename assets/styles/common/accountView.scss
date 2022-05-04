@@ -11,6 +11,7 @@
 
         .container-image {
             height: 280px;
+            position: relative;
 
             > img {
                 height: 100%;
@@ -24,6 +25,12 @@
                     transform: scale(1.02);
                     transition: ease-in-out .15s;
                 }
+            }
+        
+            .container-installed {
+                position: absolute;
+                top: 0;
+                right: 0;
             }
         }
     }

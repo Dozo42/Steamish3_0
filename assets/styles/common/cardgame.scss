@@ -11,8 +11,10 @@
     }
 
     .container-image {
+        position: relative;
         height: 220px;
 
+        
         > img {
             height: 100%;
             width: 100%;
@@ -26,7 +28,6 @@
                 transition: ease-in-out .15s;
             }
         }
-        
     }
 }
 
