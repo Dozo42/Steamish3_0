@@ -36,4 +36,15 @@ class GameController extends AbstractController
             'similar'=> $similarGames
         ]);
     }
+
+    
+    #[Route('/jeux/Avis/{slug}', name: 'app_avis')]
+    public function comments($slug = ''): Response
+    {
+        $gameEntity = $this->gameRepository->getGameAllDetails($slug);
+
+        return $this->render('game/comments.html.twig', [
+            'game' => $gameEntity,
+        ]);
+    }
 }
