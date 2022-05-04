@@ -3,7 +3,7 @@
 {% block title %}{{ parent() }}/Jeux{% endblock %}
 
 {% block body %}
-
+{# card du jeux #}
 <div class="card mx-auto mt-4 mb-4 col-10 border-2 rounded">
     <div class="row g-0">
         <div class="col-md-4 view">
@@ -23,7 +23,8 @@
                 <hr>
                 <div class=" d-flex">
                     {% for genre in game.genres %}
-                    <button type="button" class="btn btn-sm btn-outline-light me-2 align-middle">{{ genre.name }}</button>
+                    <button type="button"
+                        class="btn btn-sm btn-outline-light me-2 align-middle">{{ genre.name }}</button>
                     {# <p class="card-text me-2 align-middle">{{ genre.name }}</p> #}
                     {% endfor %}
                 </div>
@@ -36,6 +37,27 @@
                     {% endfor %}
                 </div>
             </div>
+        </div>
+    </div>
+</div>
+
+{# commentaires #}
+<div class="comment-section pb-4 pt-4">
+    <div class="container px-0">
+        <div class="row">
+            {% for comment in game.comments %}
+            <div class="col-lg-2 col-md-6 col-sm-6 col-6 p-2">
+                <div class="cardcomment">
+                    <div class="ps-3 py-3">
+                        <p>{{ comment.content|length > 75 ? comment.content|slice(0, 75) ~ '...' : comment.content  }}
+                        </p>
+                        <p>Le {{ comment.createdAt|date("m F Y") ~ ' par '}}<a
+                                href="{{ path('app_user', {'name': comment.account.name}) }}"><b>{{ comment.account.name }}</b></a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
         </div>
     </div>
 </div>

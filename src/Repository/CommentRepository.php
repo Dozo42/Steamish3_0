@@ -33,10 +33,12 @@ class CommentRepository extends ServiceEntityRepository
         }
     }
 
-    public function getLastPostedComments() {
+    public function getLastPostedComments(int $limit=4) {
         return $this->createQueryBuilder('c')
         ->orderBy('c.createdAt', 'desc')
-        ->setMaxResults(4)
+        ->setMaxResults($limit)
         ->getQuery()->getResult();
     }
+
+
 }

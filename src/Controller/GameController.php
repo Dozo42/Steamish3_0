@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\CommentRepository;
 use App\Repository\GameRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -9,8 +10,9 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class GameController extends AbstractController
 {
-    public function __construct(private GameRepository $gameRepository) {
+    public function __construct(private GameRepository $gameRepository, private CommentRepository $commentRepository) {
         $this->gameRepository = $gameRepository;
+        $this->commentRepository = $commentRepository;
     }
 
     #[Route('/jeux', name: 'app_game')]
@@ -24,12 +26,14 @@ class GameController extends AbstractController
     }
 
     #[Route('/jeux/{slug}', name: 'app_one_game')]
-    public function oneGame($slug = ''): Response
+    public function oneGame($slug = ''): Response 
     {
+        $commentEntity = $this->commentRepository->getLastPostedComments(6);
         $gameEntity = $this->gameRepository->findOneBy(['slug' => $slug]);
-
+        // dd($gameEntity);
         return $this->render('game/oneGame.html.twig', [
-            'game' => $gameEntity
+            'game' => $gameEntity,
+            'comments'=>$commentEntity
         ]);
     }
 }
