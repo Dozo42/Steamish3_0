@@ -49,4 +49,11 @@ class GameController extends AbstractController
             'game' => $gameEntity,
         ]);
     }
+
+    #[Route('/genre/{slug}', name:'app_game_by_genre')]
+    public function gameByGenre($slug): Response
+    {
+        return $this->render('game/gameGenre.html.twig', [
+        ]);
+    }
 }
