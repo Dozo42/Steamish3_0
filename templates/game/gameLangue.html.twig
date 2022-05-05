@@ -3,7 +3,15 @@
 {% block title %}{{ parent() }}: {{ language.name }}{% endblock %}
 
 {% block body %}
-    <div class="container">
+    <div class="container my-4  ">
+    <nav class="m-2" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ path('app_home') }}">Accueil</a></li>
+            <li class="breadcrumb-item"><a href="{{ path('app_game') }}">Tout les jeux</a></li>
+            <li class="breadcrumb-item"><a href="#">Toutes les langues</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{language.name}}</li>
+        </ol>
+    </nav>
         <div class="my-4">
             <h1 class="">Jeux {{ language.name }}</h1>
         </div>
