@@ -12,3 +12,8 @@ home:
   comment:
     written_on: '%date%'
     written_by: 'by %name%'
+  publishers:
+    country: 'Country'
+    name: 'Name'
+    website: 'Website'
+    nb_games: 'nb Games'

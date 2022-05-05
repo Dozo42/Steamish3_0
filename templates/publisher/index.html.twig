@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ parent() }}/{{ 'home.menu.publishers'|trans }}{% endblock %}
+{% block title %}{{ parent() }}/{{ 'home.nav.publishers'|trans }}{% endblock %}
 
 {% block body %}
 
@@ -9,10 +9,10 @@
     <table class="table table-dark table-hover table-striped border border-light border-2">
         <thead>
             <tr>
-                <th scope="col col-2">Pays</th>
-                <th scope="col col-3">Nom</th>
-                <th scope="col col-3">Site Web</th>
-                <th scope="col col-1">Nb jeux</th>
+                <th scope="col col-2">{{ 'home.publishers.country'|trans }}</th>
+                <th scope="col col-3">{{ 'home.publishers.name'|trans }}</th>
+                <th scope="col col-3">{{ 'home.publishers.website'|trans }}</th>
+                <th scope="col col-1">{{ 'home.publishers.nb_games'|trans }}</th>
             </tr>
         </thead>
         <tbody>
