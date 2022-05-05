@@ -42,7 +42,7 @@
                     <div class="d-flex my-0">
                         {% for langue in game.countries %}
                         <div class="me-2">
-                            <img src=" {{ langue.urlFlag }}" alt="{{ langue.nationality }}">
+                            <a href="{{ path('app_game_by_langue', {'slug': langue.slug}) }}"><img src=" {{ langue.urlFlag }}" alt="{{ langue.nationality }}"></a>
                         </div>
                         {% endfor %}
                     </div>

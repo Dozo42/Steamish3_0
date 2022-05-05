@@ -32,4 +32,15 @@ class CountryRepository extends ServiceEntityRepository
             $this->_em->flush();
         }
     }
+
+    public function getGamesByLanguage(string $slug) {
+        return $this->createQueryBuilder('lang')
+        ->select('lang', 'game')
+        ->join('lang.games', 'game')
+        ->where('lang.slug = :slug')
+        ->setParameter('slug', $slug)
+        ->getQuery()
+        ->getSingleResult()
+        ;
+    }
 }

@@ -1,14 +1,14 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ parent() }}: {{ genre.name }}{% endblock %}
+{% block title %}{{ parent() }}: {{ language.name }}{% endblock %}
 
 {% block body %}
     <div class="container">
         <div class="my-4">
-            <h1 class="">Jeux du genre : {{ genre.name }}</h1>
+            <h1 class="">Jeux {{ language.name }}</h1>
         </div>
         <div class="row">
-            {% for game in genre.games %}
+            {% for game in language.games %}
                 {% include "common/_cardGame.html.twig" with 
                 {
                     'homeDisplay': true
