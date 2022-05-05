@@ -198,5 +198,5 @@ class Account
         }
         return $totalPrice;
         }
-    }
+    
 }
