@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Repository\CommentRepository;
+use App\Repository\CountryRepository;
 use App\Repository\GameRepository;
+use App\Repository\GenreRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -12,7 +14,12 @@ use Symfony\Component\Routing\Annotation\Route;
 class GameController extends AbstractController
 {
     
-    public function __construct(private GameRepository $gameRepository, private CommentRepository $commentRepository) {
+    public function __construct(
+            private GameRepository $gameRepository,
+            private CommentRepository $commentRepository,
+            private GenreRepository $genreRepository,
+            private CountryRepository $countryRepository
+            ) {
         $this->gameRepository = $gameRepository;
         $this->commentRepository = $commentRepository;
     }
@@ -51,9 +58,22 @@ class GameController extends AbstractController
     }
 
     #[Route('/genre/{slug}', name:'app_game_by_genre')]
-    public function gameByGenre($slug): Response
+    public function showByGenre($slug): Response
     {
+        $genreEntity = $this->genreRepository->getGamesByGenre($slug);
+
         return $this->render('game/gameGenre.html.twig', [
+            'genre' => $genreEntity
+        ]);
+    }
+
+    #[Route('/langue/{slug}', name:'app_game_by_langue')]
+    public function showByLanguage($slug): Response
+    {
+        $languageEntity = $this->countryRepository->getGamesByLanguage($slug);
+
+        return $this->render('game/gameLangue.html.twig', [
+            'language' => $languageEntity
         ]);
     }
 }

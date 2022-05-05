@@ -34,8 +34,7 @@
                     <hr>
                     <div class=" d-flex">
                         {% for genre in game.genres %}
-                        <button type="button"
-                            class="btn btn-sm btn-outline-light me-2 align-middle">{{ genre.name }}</button>
+                        <a class="btn btn-sm btn-outline-light me-2 align-middle" href="{{ path('app_game_by_genre', {'slug': genre.slug}) }}">{{ genre.name }}</a>
                         {# <p class="card-text me-2 align-middle">{{ genre.name }}</p> #}
                         {% endfor %}
                     </div>
@@ -43,7 +42,7 @@
                     <div class="d-flex my-0">
                         {% for langue in game.countries %}
                         <div class="me-2">
-                            <img src=" {{ langue.urlFlag }}" alt="{{ langue.nationality }}">
+                            <a href="{{ path('app_game_by_langue', {'slug': langue.slug}) }}"><img src=" {{ langue.urlFlag }}" alt="{{ langue.nationality }}"></a>
                         </div>
                         {% endfor %}
                     </div>
