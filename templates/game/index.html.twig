@@ -3,25 +3,36 @@
 {% block title %}{{ parent() }}/{{ 'home.nav.games'|trans }}{% endblock %}
 
 {% block body %}
-<nav class="m-2" aria-label="breadcrumb">
-    <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="{{ path('app_home') }}">Accueil</a></li>
-      <li class="breadcrumb-item active" aria-current="page">Tout les jeux</li>
-    </ol>
-  </nav>
+
 
 <div class="container my-4">
+
+    <nav class="m-2" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ path('app_home') }}">Accueil</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Tout les jeux</li>
+        </ol>
+    </nav>
 
     <div class="row">
         <h1 class="mb-4">{{ 'home.menu.games'|trans }}</h1>
 
         {% for game in games %}
-            {% include "common/_cardGame.html.twig" with 
-            {
-                'gamesDisplay': true
-            } 
-            %}
+        <div class="col-lg-3 col-md-6 mb-3 cardgame">
+            <a href="{{path('app_one_game', {'slug': game.slug })}}">
+                <div class="container-image">
+                    <img class="img-fluid rounded-bottom shadow" src="{{game.thumbnailCover}}" alt="{{game.name}}">
+                </div>
+            </a>
+            <div class="d-flex justify-content-between mt-1">
+                <a href="{{path('app_one_game', {'slug': game.slug })}}">
+                    <h3>{{game.name}}</h3>
+                </a>
+                <h3>{{game.price}}€</h3>
+            </div>
+        </div>
         {% endfor %}
+
     </div>
 </div>
 {% endblock %}

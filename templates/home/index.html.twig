@@ -2,13 +2,15 @@
 
 
 {% block body %}
-<nav class="m-2" aria-label="breadcrumb">
-    <ol class="breadcrumb ">
-        <li class="breadcrumb-item active" aria-current="page">Accueil</li>
-    </ol>
-</nav>
+
 
     <div class="container">
+        <nav class="m-2" aria-label="breadcrumb">
+            <ol class="breadcrumb ">
+                <li class="breadcrumb-item active" aria-current="page">Accueil</li>
+            </ol>
+        </nav>
+
         <div class="d-flex justify-content-between align-items-center my-4">
             <h1 class="mb-1">{{ 'home.menu.last_published'|trans }}</h1>
             <div><a class="btn btn-sm btn-outline-light" href="{{path('app_game')}}"><i class="fa-solid fa-plus"></i></a></div>
