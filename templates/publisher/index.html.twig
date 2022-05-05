@@ -26,7 +26,7 @@
             {% for publisher in publishers %}
             <tr>
                 <th scope="row"><img src="{{ publisher.country.urlFlag }}"></th>
-                <td>{{ publisher.name }}</td>
+                <td><a href="{{ path('app_showPublisher', {'slug': publisher.slug }) }}">{{ publisher.name }}</a></td>
                 <td><a href="{{ publisher.website }}" target="_blank">{{ publisher.website }}</a></td>
                 <td>{{ publisher.games|length }}</td>
             </tr>

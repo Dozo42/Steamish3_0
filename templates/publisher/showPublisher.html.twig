@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }}: {{ publisher.name }}{% endblock %}
+
+
+{% block body %}
+<div class="container my-4  ">
+    <nav class="m-2" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ path('app_home') }}">Accueil</a></li>
+            <li class="breadcrumb-item"><a href="{{ path('app_publisher') }}">Tout les éditeurs</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{publisher.name}}</li>
+        </ol>
+    </nav>
+    <div class="my-4">
+        <h1 class="">Jeux {{ publisher.name }}</h1>
+    </div>
+    <div class="row">
+        {% for game in publisher.games %}
+        {% include "common/_cardGame.html.twig" with 
+                {
+                    'homeDisplay': true
+                } 
+                %}
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

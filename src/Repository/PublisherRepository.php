@@ -2,8 +2,12 @@
 
 namespace App\Repository;
 
+use App\Entity\Game;
 use App\Entity\Publisher;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query\Expr\Func;
+use Doctrine\ORM\Query\Expr\Join;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -33,14 +37,32 @@ class PublisherRepository extends ServiceEntityRepository
         }
     }
 
-    /**
-     * @return Publisher[]
-     */
-    public function getPublishersAll(): array {
+    public function getQueryBuilder(): QueryBuilder {
         return $this->createQueryBuilder('p')
             ->select('p', 'country', 'games')
             ->join('p.country', 'country')
             ->join('p.games', 'games')
+        ;
+    }
+
+    /**
+     * @return Publisher|null
+     */
+    public function getPublisherBySlug(string $slug): ?Publisher {
+        return $this->getQueryBuilder()
+            ->where('p.slug = :slug')
+            ->setParameter('slug', $slug)
+            ->orderBy('games.publishedAt', 'DESC')
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
+
+    /**
+     * @return Publisher[]
+     */
+    public function getPublishersAll(): array {
+        return $this->getQueryBuilder()
             ->orderBy('p.name')
 //            ->setMaxResults(5)
             ->getQuery()
