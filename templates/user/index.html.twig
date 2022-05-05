@@ -8,7 +8,8 @@
             <div class="col-12 account-card text-center">
                 <h1 class="m-0 pt-2">{{ account.name }}</h1>
                 <p class="mb-0"><small class="text-muted">{{ account.nickname }}</small></p> 
-                <p class="mb-0"><small class="text-muted">Inscrit depuis le {{ account.createdAt|date("m F Y") }}</small></p> 
+                <p class="mb-0"><small class="text-muted">Inscrit depuis le {{ account.createdAt|date("m F Y") }}</small></p>
+                <p>{{ account.totalGameTime|time_to_string }}</p> 
                 <hr>
                 <div class="row mt-4">
                     {% for library in account.libraries %}

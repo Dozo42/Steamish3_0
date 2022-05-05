@@ -180,4 +180,13 @@ class Account
 
         return $this;
     }
+
+    public function getTotalGameTime(): int {
+        $totalGameTime = 0;
+        foreach ($this->getLibraries() as $library) {
+            /** @var Library $library */
+            $totalGameTime += $library->getGameTime();
+        }
+        return $totalGameTime;
+    }
 }
