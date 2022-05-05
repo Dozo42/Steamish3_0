@@ -7,10 +7,20 @@
         <li class="breadcrumb-item active" aria-current="page">Accueil</li>
     </ol>
 </nav>
-<div class="container">
-    <div class="d-flex justify-content-between align-items-center my-4">
-        <h1 class="mb-1">{{ 'home.menu.last_published'|trans }}</h1>
-        <div><a class="btn btn-sm btn-outline-light" href="{{path('app_game')}}"><i class="fa-solid fa-plus"></i></a>
+
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-center my-4">
+            <h1 class="mb-1">{{ 'home.menu.last_published'|trans }}</h1>
+            <div><a class="btn btn-sm btn-outline-light" href="{{path('app_game')}}"><i class="fa-solid fa-plus"></i></a></div>
+        </div>
+        <div class="row">
+            {% for game in lastPublishedGames %}
+                {% include "common/_cardGame.html.twig" with 
+                {
+                    'homeDisplay': true
+                } 
+                %}
+            {% endfor %}
         </div>
     </div>
     <div class="row">
@@ -20,10 +30,19 @@
     </div>
 </div>
 
-<div class="container">
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <h1 class="m-0">{{ 'home.menu.most_played'|trans }}</h1>
-        <div><a class="btn btn-sm btn-outline-light" href="{{path('app_game')}}"><i class="fa-solid fa-plus"></i></a>
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1 class="m-0">{{ 'home.menu.most_played'|trans }}</h1>
+            <div><a class="btn btn-sm btn-outline-light" href="{{path('app_game')}}"><i class="fa-solid fa-plus"></i></a></div>
+        </div>
+        <div class="row">
+            {% for game in mostPlayedGames %}
+                {% include "common/_cardGame.html.twig" with 
+                {
+                    'homeDisplay': true
+                } 
+                %}
+            {% endfor %}
         </div>
     </div>
     <div class="row">
@@ -57,10 +76,19 @@
     </div>
 </div>
 
-<div class="container">
-    <div class="d-flex justify-content-between align-items-center my-4">
-        <h1 class="mb-1">{{ 'home.menu.most_bought'|trans }}</h1>
-        <div><a class="btn btn-sm btn-outline-light" href="{{path('app_game')}}"><i class="fa-solid fa-plus"></i></a>
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-center my-4">
+            <h1 class="mb-1">{{ 'home.menu.most_bought'|trans }}</h1>
+            <div><a class="btn btn-sm btn-outline-light" href="{{path('app_game')}}"><i class="fa-solid fa-plus"></i></a></div>
+        </div>
+        <div class="row">
+            {% for game in mostBoughtGames %}
+                {% include "common/_cardGame.html.twig" with 
+                {
+                    'homeDisplay': true
+                } 
+                %}
+            {% endfor %}
         </div>
     </div>
     <div class="row">

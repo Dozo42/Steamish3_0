@@ -1,13 +1,29 @@
-<div class="col-lg-4 col-md-6 col-sm-6 col-6 mb-4 cardgame">
-    <a href="{{path('app_one_game', {'slug': game.slug })}}">
+<div class="col-6 col-sm-6 col-md-4 mb-4 {% if homeDisplay is defined %}col-lg-4{% else %}col-lg-3{% endif %} {% if accountDisplay is defined %}account-library{% else %}cardgame{% endif %}">
+    {% if accountDisplay is defined %}
+        <a href="{{path('app_one_game', {'slug': library.game.slug })}}">
+    {% else %}
+        <a href="{{path('app_one_game', {'slug': game.slug })}}">
+    {% endif %}
         <div class="container-image">
-           <img class="img-fluid shadow" src="{{game.thumbnailCover}}" alt="{{game.name}}">
+           {% if accountDisplay is defined %}
+                <img src="{{library.game.thumbnailCover}}" alt="{{library.game.name}}">
+                <div class="container-installed">
+                    <i class="fa-solid fa-circle {% if library.installed == true %}green{% else %}red{% endif %}"></i>
+                </div>
+            {% else %}
+                <img class="img-fluid shadow {% if gamesDisplay is defined %}rounded-bottom{% endif %}" src="{{game.thumbnailCover}}" alt="{{game.name}}">
+           {% endif %}
         </div>
     </a>
     <div class="d-flex justify-content-between">
-        <a href="{{path('app_one_game', {'slug': game.slug })}}">
+        {% if accountDisplay is defined %}
+            <p class="mb-0">{{library.timeConverter}}</p>
+            <p class="mb-0">{{library.lastUsedAt|date('m F Y')}}</p>
+        {% else %}
+            <a href="{{path('app_one_game', {'slug': game.slug })}}">
             <h3 class="mt-1">{{game.name}}</h3>
-        </a>
-        <h2 class="h4">{{game.price}}€</h2>
+            </a>
+            <h2 class="h4">{{game.price}}€</h2>
+        {% endif %}
     </div>
 </div>

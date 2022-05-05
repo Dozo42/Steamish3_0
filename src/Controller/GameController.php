@@ -10,6 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class GameController extends AbstractController
 {
+    
     public function __construct(private GameRepository $gameRepository, private CommentRepository $commentRepository) {
         $this->gameRepository = $gameRepository;
         $this->commentRepository = $commentRepository;
