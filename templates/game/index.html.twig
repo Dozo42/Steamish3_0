@@ -3,6 +3,13 @@
 {% block title %}{{ parent() }}/{{ 'home.nav.games'|trans }}{% endblock %}
 
 {% block body %}
+<nav class="m-2" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{{ path('app_home') }}">Accueil</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Tout les jeux</li>
+    </ol>
+  </nav>
+
 <div class="container my-4">
 
     <div class="row">

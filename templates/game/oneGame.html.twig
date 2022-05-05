@@ -3,6 +3,13 @@
 {% block title %}{{ parent() }}/Jeux{% endblock %}
 
 {% block body %}
+<nav class="m-2" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{ path('app_home') }}">Accueil</a></li>
+        <li class="breadcrumb-item"><a href="{{ path('app_game') }}">Tout les jeux</a></li>
+        <li class="breadcrumb-item active" aria-current="page">{{game.name}}</li>
+    </ol>
+</nav>
 {# card du jeux #}
 <div class="card mx-auto mt-4 mb-4 col-10 border-2 rounded">
     <div class="row g-0">
@@ -42,6 +49,8 @@
 </div>
 
 {# commentaires #}
+
+
 <div class="comment-section pb-4 pt-4">
 
     <div class="container px-0">
