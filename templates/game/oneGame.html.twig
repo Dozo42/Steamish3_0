@@ -51,25 +51,7 @@
                 <div><a class="btn btn-sm btn-outline-light" href="{{path('app_avis', {'slug': game.slug})}}"><i class="fa-solid fa-plus"></i></a></div>
             </div>
             {% for comment in game.comments|slice(0, 6) %}
-            <div class="col-12 p-2">
-                <div class="cardcomment">
-                    <div class="ps-3 py-3">
-                        <div class="d-flex align-middle justify-content-between pe-4">
-                            <p>Le {{ comment.createdAt|date("m F Y") ~ ' par '}}<a
-                                    href="{{ path('app_user', {'name': comment.account.name}) }}"><b>{{ comment.account.name }}</b></a>
-                            </p>
-                            <div class="d-flex">
-                                <p><i class="fa-solid fa-circle-up green"></i></p>
-                                <p>{{ comment.upVotes }}</p>
-
-                                <p><i class="fa-solid fa-circle-down red ms-2"></i></p>
-                                <p>{{ comment.downVotes }}</p>
-                            </div>
-                        </div>
-                        <p class="pe-2">{{ comment.content  }}</p>
-                    </div>
-                </div>
-            </div>
+            {% include "common/_cardComment.html.twig" %}
             {% endfor %}
         </div>
     </div>
