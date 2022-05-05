@@ -8,6 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+#[Route('/jeux')]
 class GameController extends AbstractController
 {
     
@@ -16,7 +17,7 @@ class GameController extends AbstractController
         $this->commentRepository = $commentRepository;
     }
 
-    #[Route('/jeux', name: 'app_game')]
+    #[Route('/', name: 'app_game')]
     public function index(): Response
     {
         $games = $this->gameRepository->findAll();
@@ -26,7 +27,7 @@ class GameController extends AbstractController
         ]);
     }
 
-    #[Route('/jeux/{slug}', name: 'app_one_game')]
+    #[Route('/{slug}', name: 'app_one_game')]
     public function oneGame($slug = ''): Response 
     {
         $gameEntity = $this->gameRepository->getGameAllDetails($slug);
@@ -39,7 +40,7 @@ class GameController extends AbstractController
     }
 
     
-    #[Route('/jeux/{slug}/Avis', name: 'app_avis')]
+    #[Route('/{slug}/avis', name: 'app_avis')]
     public function comments($slug = ''): Response
     {
         $gameEntity = $this->gameRepository->getGameAllDetails($slug);
