@@ -4,6 +4,12 @@
 
 {% block body %}
     <div class="container mt-4">
+        <nav class="m-2" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ path('app_home') }}">Accueil</a></li>
+                <li class="breadcrumb-item active" aria-current="page">{{account.name}}</li>
+            </ol>
+        </nav>
         <div class="row">
             <div class="col-12 account-card text-center">
                 <h1 class="m-0 pt-2">{{ account.name }}</h1>
