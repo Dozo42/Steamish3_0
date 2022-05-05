@@ -4,8 +4,8 @@
             <div class="d-flex align-middle justify-content-between pe-4">
                 <p>{{ 'home.comment.written_on'|trans({
                     '%date%': comment.createdAt|date("m F Y")
-                }) }}<a
-                        href="{{ path('app_user', {'name': comment.account.name}) }}"><b> {{ 'home.comment.written_by'|trans({
+                }) }}
+                    <a href="{{ path('app_user', {'name': comment.account.name}) }}"><b> {{ 'home.comment.written_by'|trans({
                     '%name%': comment.account.name
                 }) }}</b></a>
                 </p>
@@ -18,7 +18,9 @@
                 </div>
             </div>
             <p class="pe-2">{{ comment.content }}</p>
-            <p class="pe-2">{{ comment.game.name }}</p>
+            {% if accountDisplay is defined %}
+            <h6 class="pe-2 ">{{ comment.game.name }}</h6>
+            {% endif %}
         </div>
     </div>
 </div>
