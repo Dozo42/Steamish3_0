@@ -5,7 +5,7 @@
 
     <div class="container">
         <div class="d-flex justify-content-between align-items-center my-4">
-            <h1 class="mb-1">Les dernières sorties</h1>
+            <h1 class="mb-1">{{ 'home.menu.last_published'|trans }}</h1>
             <div><a class="btn btn-sm btn-outline-light" href="{{path('app_game')}}"><i class="fa-solid fa-plus"></i></a></div>
         </div>
         <div class="row">
@@ -17,7 +17,7 @@
 
     <div class="container">
         <div class="d-flex justify-content-between align-items-center mb-4">
-            <h1 class="m-0">Les plus joués</h1>
+            <h1 class="m-0">{{ 'home.menu.most_played'|trans }}</h1>
             <div><a class="btn btn-sm btn-outline-light" href="{{path('app_game')}}"><i class="fa-solid fa-plus"></i></a></div>
         </div>
         <div class="row">
@@ -29,7 +29,7 @@
 
     <div class="comment-section pb-4 pt-4">
         <div class="container px-0">
-            <h1 class="mb-4">Les derniers commentaires</h1>
+            <h1 class="mb-4">{{ 'home.menu.last_comments'|trans }}</h1>
             <div class="row">
                 {% for comment in lastPostedComments %}
                     <div class="col-lg-3 col-md-6 col-sm-6 col-6 p-2">
@@ -37,7 +37,8 @@
                             <div class="ps-3 py-3">
                                 <h5><a class="text-decoration-none" href="{{ path('app_one_game', {'slug': comment.game.slug}) }}">{{comment.game.name}}</a></h5>
                                 <p>{{ comment.content|length > 75 ? comment.content|slice(0, 75) ~ '...' : comment.content  }}</p>
-                                <p>Le {{ comment.createdAt|date("m F Y") ~ ' par '}}<a href="{{ path('app_user', {'name': comment.account.name}) }}"><b>{{ comment.account.name }}</b></a></p>
+                                <p>{{ 'home.comment.written_on'|trans({'%date%': comment.createdAt|date("m F Y")}) }}
+                                <a href="{{ path('app_user', {'name': comment.account.name}) }}"><b> {{ 'home.comment.written_by'|trans({'%name%': comment.account.name}) }}</b></a></p>
                             </div>
                         </div>
                     </div>
@@ -48,7 +49,7 @@
 
     <div class="container">
         <div class="d-flex justify-content-between align-items-center my-4">
-            <h1 class="mb-1">Les plus achetés</h1>
+            <h1 class="mb-1">{{ 'home.menu.most_bought'|trans }}</h1>
             <div><a class="btn btn-sm btn-outline-light" href="{{path('app_game')}}"><i class="fa-solid fa-plus"></i></a></div>
         </div>
         <div class="row">
