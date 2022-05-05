@@ -76,10 +76,11 @@ class GameRepository extends ServiceEntityRepository
 
     public function getGameAllDetails(string $slug): ?Game {
         return $this->createQueryBuilder('g')
-        ->select('g', 'c', 'ge', 'co', 'p')
+        ->select('g', 'c', 'ge', 'co', 'p', 'acc')
         ->join('g.countries', 'c')
         ->join('g.genres', 'ge')
-        ->join('g.comments', 'co')
+        ->leftJoin('g.comments', 'co')
+        ->leftJoin('co.account', 'acc')
         ->leftJoin('g.publisher', 'p')
         ->where('g.slug = :slug')
         ->setParameter('slug', $slug)
