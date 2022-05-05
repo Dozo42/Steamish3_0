@@ -197,6 +197,6 @@ class Account
             $totalPrice += $library->getGame()->getPrice();
         }
         return $totalPrice;
-        }
+    }
     
 }
