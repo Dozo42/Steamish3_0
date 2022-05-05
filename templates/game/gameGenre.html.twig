@@ -3,5 +3,19 @@
 {% block title %}{{ parent() }}{% endblock %}
 
 {% block body %}
+    <div class="container">
+        <div class="my-4">
+            <h1 class="">Jeux du genre : {{ genre.name }}</h1>
+        </div>
+        <div class="row">
+            {% for game in genre.games %}
+                {% include "common/_cardGame.html.twig" with 
+                {
+                    'homeDisplay': true
+                } 
+                %}
+            {% endfor %}
+        </div>
+    </div>
 
 {% endblock %}

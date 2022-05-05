@@ -33,4 +33,15 @@ class GenreRepository extends ServiceEntityRepository
             $this->_em->flush();
         }
     }
+
+    public function getGamesByGenre(string $slug) {
+        return $this->createQueryBuilder('genre')
+        ->select('genre', 'game')
+        ->join('genre.games', 'game')
+        ->where('genre.slug = :slug')
+        ->setParameter('slug', $slug)
+        ->getQuery()
+        ->getSingleResult()
+        ;
+    }
 }

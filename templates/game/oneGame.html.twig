@@ -35,7 +35,8 @@
                     <div class=" d-flex">
                         {% for genre in game.genres %}
                         <button type="button"
-                            class="btn btn-sm btn-outline-light me-2 align-middle">{{ genre.name }}</button>
+                            class="btn btn-sm btn-outline-light me-2 align-middle"><a href="{{ path('app_game_by_genre', {'slug': genre.slug}) }}">{{ genre.name }}</a>
+                        </button>
                         {# <p class="card-text me-2 align-middle">{{ genre.name }}</p> #}
                         {% endfor %}
                     </div>
