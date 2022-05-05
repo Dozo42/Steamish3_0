@@ -10,7 +10,11 @@
         </div>
         <div class="row">
             {% for game in lastPublishedGames %}
-                {% include "common/_cardGame.html.twig" %}
+                {% include "common/_cardGame.html.twig" with 
+                {
+                    'homeDisplay': true
+                } 
+                %}
             {% endfor %}
         </div>
     </div>
@@ -22,7 +26,11 @@
         </div>
         <div class="row">
             {% for game in mostPlayedGames %}
-                {% include "common/_cardGame.html.twig" %}
+                {% include "common/_cardGame.html.twig" with 
+                {
+                    'homeDisplay': true
+                } 
+                %}
             {% endfor %}
         </div>
     </div>
@@ -54,7 +62,11 @@
         </div>
         <div class="row">
             {% for game in mostBoughtGames %}
-                {% include "common/_cardGame.html.twig" %}
+                {% include "common/_cardGame.html.twig" with 
+                {
+                    'homeDisplay': true
+                } 
+                %}
             {% endfor %}
         </div>
     </div>

@@ -12,20 +12,11 @@
                 <hr>
                 <div class="row mt-4">
                     {% for library in account.libraries %}
-                        <div class="col-6 col-sm-6 col-md-4 col-lg-3 account-library mb-4">
-                            <a href="{{path('app_one_game', {'slug': library.game.slug })}}">
-                                <div class="container-image">
-                                    <img src="{{library.game.thumbnailCover}}" alt="{{library.game.name}}">
-                                    <div class="container-installed">
-                                        <i class="fa-solid fa-circle {% if library.installed == true %}green{% else %}red{% endif %}"></i>
-                                    </div>
-                                </div>
-                                <div class="d-flex justify-content-between">
-                                    <p class="mb-0">{{library.timeConverter}}</p>
-                                    <p class="mb-0">{{library.lastUsedAt|date('m F Y')}}</p>
-                                </div>
-                            </a>
-                        </div>
+                        {% include "common/_cardGame.html.twig" with 
+                        {
+                            'accountDisplay': true
+                        } 
+                        %}
                     {% endfor %}
                 </div>
                 <hr class="mt-0">
