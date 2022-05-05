@@ -76,4 +76,12 @@ class GameController extends AbstractController
             'language' => $languageEntity
         ]);
     }
+
+    #[Route('/ajax/search_engine/{research}', name:'app_research')]
+    public function ajaxResearch($research): Response {
+
+        dd($research);
+        return $this->render('game/gameLangue.html.twig', [
+        ]);
+    }
 }
