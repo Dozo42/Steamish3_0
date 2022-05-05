@@ -1,0 +1,14 @@
+home:
+  nav:
+    publishers: 'Publishers'
+    games: 'Games'
+  menu:
+    publishers: 'Publishers'
+    games: 'Games list'
+    last_published: 'Last published'
+    most_played: 'Most played'
+    last_comments: 'Last reviews'
+    most_bought: 'Most bought'
+  comment:
+    written_on: '%date%'
+    written_by: 'by %name%'

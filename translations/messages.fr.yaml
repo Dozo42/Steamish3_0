@@ -1,0 +1,14 @@
+home:
+  nav:
+    publishers: 'Editeurs'
+    games: 'Jeux'
+  menu:
+    publishers: 'Les Editeurs'
+    games: 'Liste des jeux'
+    last_published: 'Les dernières sorties'
+    most_played: 'Les plus joués'
+    last_comments: 'Les derniers commentaires'
+    most_bought: 'Les plus achetés'
+  comment:
+    written_on: 'Le %date%'
+    written_by: 'par %name%'
