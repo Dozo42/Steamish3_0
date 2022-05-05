@@ -63,8 +63,11 @@
                     <div><a class="btn btn-sm btn-outline-light" href="{{path('app_avis', {'slug': game.slug})}}"><i
                                 class="fa-solid fa-plus"></i></a></div>
             </div>
-            {% for comment in game.comments|slice(0, 6) %}
-            {% include "common/_cardComment.html.twig" %}
+            {% for comment in game.comments|slice(0, 6)  %}
+            {% include "common/_cardComment.html.twig" with 
+            {
+                'oneGameDisplay': true
+            } %}
             {% endfor %}
         </div>
     </div>
