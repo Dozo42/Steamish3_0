@@ -38,7 +38,7 @@ class GameController extends AbstractController
     }
 
     
-    #[Route('/jeux/Avis/{slug}', name: 'app_avis')]
+    #[Route('/jeux/{slug}/Avis', name: 'app_avis')]
     public function comments($slug = ''): Response
     {
         $gameEntity = $this->gameRepository->getGameAllDetails($slug);
