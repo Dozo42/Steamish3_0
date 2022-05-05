@@ -6,6 +6,7 @@ use App\Entity\Comment;
 use App\Entity\Game;
 use App\Entity\Genre;
 use App\Entity\Library;
+use App\Entity\Publisher;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\Persistence\ManagerRegistry;
@@ -104,5 +105,19 @@ class GameRepository extends ServiceEntityRepository
         ;
     }
 
-    
+    public function getCountBoughtGamesByPublisher(Publisher $publisher) {
+
+        return $this->createQueryBuilder('g')
+            ->select('g', 'COUNT(g)')
+            ->join(Library::class, 'lib', Join::WITH, 'lib.game = g')
+            ->leftJoin('g.publisher', 'p')
+            ->where('p = :publisher')
+            ->setParameter('publisher',$publisher)
+            ->groupBy('lib.game')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+
  }
