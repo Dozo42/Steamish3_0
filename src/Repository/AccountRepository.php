@@ -46,4 +46,17 @@ class AccountRepository extends ServiceEntityRepository
         ;
     }
 
+    public function getAccountsPlayTime() 
+    {
+        return $this->createQueryBuilder('t')
+        ->select('t', 'lib')
+        ->leftJoin('t.libraries', 'lib')
+        ->groupBy('lib.account')
+
+        ->getQuery()
+        ->getOneOrNullResult()
+        ;
+    }
+
+
 }
