@@ -3,6 +3,11 @@
 {% block title %}Hello UserController!{% endblock %}
 
 {% block body %}
+<ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{{ path('app_home') }}">Accueil</a></li>
+    <li class="breadcrumb-item"><a href="{{ path('app_user_index') }}">Utilisateurs</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Nouvel Utilisateur</li>
+</ol>
 
 <div class="container my-4">
     <div class="d-flex">
