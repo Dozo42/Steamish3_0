@@ -50,7 +50,7 @@ class UserController extends AbstractController
     }
 
     #[Route('/modifier/{name}', name: 'app_mod_user')]
-    public function edit(Account $account, Request $request, EntityManagerInterface $em): Response
+    public function edit(Account $account, Request $request, EntityManagerInterface $em, string $name): Response
     {
         $form =$this->createForm(AccountType::class, $account);
         $form->handleRequest($request);
@@ -62,6 +62,7 @@ class UserController extends AbstractController
               return $this->redirectToRoute('app_user_index');
         }
         return $this->render('user/modified.html.twig',[
+            'account' => $this->accountRepository->getAccountAllDetails($name),
             'form'=>$form->createView(),
         ]);
 
