@@ -32,7 +32,7 @@
                 <td>{{ user.email }}</td>
                 <td>{{ user.nickname }}</td>
                 <td>{{ user.createdAt |date("m F Y")  }}</td>
-                <td><a href="{{path ('app_new_user')}}"><i class="fa-solid fa-pencil"></i></a></td>
+                <td><a href="{{path ('app_mod_user', {'name': user.name })}}"><i class="fa-solid fa-pencil"></i></a></td>
             </tr>
             {% endfor %}
         </tbody>

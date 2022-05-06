@@ -33,16 +33,16 @@ class AccountRepository extends ServiceEntityRepository
         }
     }
 
-    public function getAccountAllDetails(string $name) {
+    public function getAccountAllDetails(string $name): ?Account {
 
         return $this->createQueryBuilder('a')
         ->select('a', 'lib', 'games')
-        ->join('a.libraries', 'lib')
-        ->join('lib.game', 'games')
+        ->leftJoin('a.libraries', 'lib')
+        ->leftJoin('lib.game', 'games')
         ->where('a.name = :name')
         ->setParameter('name', $name)
         ->getQuery()
-        ->getSingleResult()
+        ->getOneOrNullResult()
         ;
     }
 
