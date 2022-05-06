@@ -37,8 +37,7 @@ class PublisherController extends AbstractController
           
             $price += $jeux[0]->getPrice()*$jeux[1];
         }
-        dd($price);
-
+        
         return $this->render('publisher/showPublisher.html.twig', [
             'publisher' => $publisherEntity,
             'price'=> $price
