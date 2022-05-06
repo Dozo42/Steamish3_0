@@ -80,8 +80,9 @@ class GameController extends AbstractController
     #[Route('/ajax/search_engine/{research}', name:'app_research')]
     public function ajaxResearch($research): Response {
 
-        dd($research);
-        return $this->render('game/gameLangue.html.twig', [
-        ]);
+        $gameEntity = $this->gameRepository->getGamesByAjaxRequest($research);
+        dd($gameEntity);
+        // return $this->render('game/gameLangue.html.twig', [
+        // ]);
     }
 }

@@ -119,5 +119,13 @@ class GameRepository extends ServiceEntityRepository
         ;
     }
 
+    public function getGamesByAjaxRequest(string $research) {
+
+        return $this->createQueryBuilder('g')
+        ->where('g.name LIKE :research')
+        ->setParameter('research' , '%'.$research.'%')
+        ;
+    }
+
 
  }
