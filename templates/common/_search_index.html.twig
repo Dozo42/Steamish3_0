@@ -1,0 +1,11 @@
+<ul class="list-group ">
+    {% if games|length == 0 %}
+        <li class="list-group-item list-group-item-action">Aucun Résultat trouvé ...</li>
+    {% else %}
+        {% for gameFound in games %}
+            <a href="{{ path('app_one_game', {'slug': gameFound.slug }) }}">
+            <li class="list-group-item list-group-item-action">{{ gameFound.name }}</li>
+            </a>
+        {% endfor %}
+    {% endif %}
+</ul>

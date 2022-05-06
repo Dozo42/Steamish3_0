@@ -17,9 +17,12 @@
           <a class="nav-link" href="{{ path('app_user_index') }}">Utilisateurs</a>
         </li>
       </ul>
-      <form class="d-flex">
-        <input id="search-input" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button id="search-button" class="btn btn-outline-light" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+      <form id="form-result" class="d-flex">
+        <div style="position: relative;">
+          <input id="search-input" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <div id="livesearch" style=" width:auto; height:auto; margin:auto;  position: absolute;"></div>
+        </div>
+        <button class="btn btn-outline-light" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
       </form>
     </div>
   </div>

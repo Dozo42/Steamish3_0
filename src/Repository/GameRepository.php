@@ -124,6 +124,8 @@ class GameRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('g')
         ->where('g.name LIKE :research')
         ->setParameter('research' , '%'.$research.'%')
+        ->getQuery()
+        ->getResult()
         ;
     }
 
