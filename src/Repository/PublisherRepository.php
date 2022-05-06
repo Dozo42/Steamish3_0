@@ -70,5 +70,15 @@ class PublisherRepository extends ServiceEntityRepository
         ;
     }
 
+    public function getPublishersByAjaxRequest(string $research) {
+
+        return $this->createQueryBuilder('p')
+        ->where('p.name LIKE :research')
+        ->setParameter('research' , '%'.$research.'%')
+        ->getQuery()
+        ->getResult()
+        ;
+    }
+
 
 }
