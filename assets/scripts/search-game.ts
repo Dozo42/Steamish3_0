@@ -11,21 +11,23 @@ window.addEventListener('load', () => {
 
     if (searchInput) {        
         searchInput.addEventListener('keyup', (e) => {
-            e.preventDefault();
-            console.log(searchInput.value);
 
-            if (searchInput.value.length != 0) {
+            //Déclaration de ma variable qui affichera mes résultats
+            let results = document.querySelector('#livesearch');
+
+            //Commence à faire la recherche intéractive au bout de 2 caractères
+            if (searchInput.value.length >= 2) {
                 fetch('/jeux/ajax/search_engine/' + searchInput.value, {
                     method: 'GET'
                 }).then(response => {
                     return response.json() as Promise<HTMLData>;                
                 })            
                 .then(data => {
-                    let results = document.querySelector('#livesearch');
+                    results.classList.remove('d-none');
                     results.innerHTML = data.html;
-                    // searchInput.innerHTML += data.html;
-                    
                 });
+            } else if (searchInput.value.length < 2 && e.code == 'Backspace') {
+                results.classList.add('d-none');
             }
         });
     }

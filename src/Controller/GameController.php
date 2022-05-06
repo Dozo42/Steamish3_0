@@ -81,10 +81,10 @@ class GameController extends AbstractController
     #[Route('/ajax/search_engine/{research}', name:'app_research')]
     public function ajaxResearch($research): JsonResponse {
 
-        $gameEntity = $this->gameRepository->getGamesByAjaxRequest($research);
+        $gameEntities = $this->gameRepository->getGamesByAjaxRequest($research);
         return (new JsonResponse())->setData([
             'html' => $this->renderView('common/_search_index.html.twig', [
-                'games' => $gameEntity,
+                'games' => $gameEntities,
             ]),
         ]);
     }
