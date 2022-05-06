@@ -11,8 +11,10 @@
             <li class="breadcrumb-item active" aria-current="page">Utilisateurs</li>
         </ol>
     </nav>
-
-    <h2 class="mb-3">Utilisateurs</h2>
+    <div class="d-flex">
+        <h2 class="mb-3">Utilisateurs</h2>
+        <a class="btn btn-sm btn-outline-light ms-4 mb-3 mt-1 " href="{{path ('app_new_user')}}"><i class="fa-solid fa-plus"></i></a>
+    </div>
     <table class="table table-dark table-hover table-striped border border-light border-2">
         <thead>
             <tr>
@@ -26,11 +28,11 @@
         <tbody>
             {% for user in account %}
             <tr>
-                <th>{{ user.name }}</th>
+                <th><a href="{{ path('app_user', {'name': user.name }) }}">{{ user.name }}</a></th>
                 <td>{{ user.email }}</td>
                 <td>{{ user.nickname }}</td>
                 <td>{{ user.createdAt |date("m F Y")  }}</td>
-                <td><i class="fa-solid fa-pencil"></i></td>
+                <td><a href="{{path ('app_new_user')}}"><i class="fa-solid fa-pencil"></i></a></td>
             </tr>
             {% endfor %}
         </tbody>
