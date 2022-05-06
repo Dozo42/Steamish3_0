@@ -44,4 +44,14 @@ class GenreRepository extends ServiceEntityRepository
         ->getSingleResult()
         ;
     }
+
+    public function getGenresByAjaxRequest(string $research) {
+
+        return $this->createQueryBuilder('g')
+        ->where('g.name LIKE :research')
+        ->setParameter('research' , '%'.$research.'%')
+        ->getQuery()
+        ->getResult()
+        ;
+    }
 }
