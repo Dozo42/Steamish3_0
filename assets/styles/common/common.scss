@@ -21,12 +21,21 @@ a {
 
 .green{
   color: $green ;
+  &:hover{
+    color:$green;
+}
 }
 
 .red{
   color: $red ;
+  &:hover{
+    color:$red;
+}
 }
 
 .orange{
   color: $orange;
+  &:hover{
+    color:$yellow;
+}
 }
