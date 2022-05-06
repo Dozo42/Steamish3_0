@@ -18,7 +18,7 @@ class UserController extends AbstractController
     #[Route('/{name}', name: 'app_user')]
     public function show(string $name): Response
     {
-        return $this->render('user/index.html.twig', [
+        return $this->render('user/showAccount.html.twig', [
             'account' => $this->accountRepository->getAccountAllDetails($name)
         ]);
     }
