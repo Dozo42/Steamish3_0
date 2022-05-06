@@ -6,6 +6,7 @@ use App\Repository\CommentRepository;
 use App\Repository\CountryRepository;
 use App\Repository\GameRepository;
 use App\Repository\GenreRepository;
+use App\Repository\PublisherRepository;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,7 +20,8 @@ class GameController extends AbstractController
             private GameRepository $gameRepository,
             private CommentRepository $commentRepository,
             private GenreRepository $genreRepository,
-            private CountryRepository $countryRepository
+            private CountryRepository $countryRepository,
+            private PublisherRepository $publisherRepository
             ) {
         $this->gameRepository = $gameRepository;
         $this->commentRepository = $commentRepository;
@@ -82,9 +84,14 @@ class GameController extends AbstractController
     public function ajaxResearch($research): JsonResponse {
 
         $gameEntities = $this->gameRepository->getGamesByAjaxRequest($research);
+        $genreEntities = $this->genreRepository->getGenresByAjaxRequest($research);
+        $publisherEntities = $this->publisherRepository->getPublishersByAjaxRequest($research);
+
         return (new JsonResponse())->setData([
             'html' => $this->renderView('common/_search_index.html.twig', [
                 'games' => $gameEntities,
+                'genres' => $genreEntities,
+                'publishers' => $publisherEntities
             ]),
         ]);
     }

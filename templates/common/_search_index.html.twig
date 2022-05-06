@@ -1,11 +1,32 @@
 <ul class="list-group ">
-    {% if games|length == 0 %}
-        <li class="list-group-item list-group-item-action">Aucun Résultat trouvé...</li>
+    {% if games|length == 0 and genres|length == 0 and publishers|length == 0 %}
+        <li class="list-group-item">Aucun Résultat trouvé...</li>
     {% else %}
-        {% for gameFound in games %}
-            <a href="{{ path('app_one_game', {'slug': gameFound.slug }) }}">
-            <li class="list-group-item list-group-item-action">{{ gameFound.name }}</li>
-            </a>
-        {% endfor %}
+        {% if games|length > 0 %}
+            <li class="list-group-item text-center">----JEUX----</li>
+            {% for gameFound in games %}
+                <a href="{{ path('app_one_game', {'slug': gameFound.slug }) }}">
+                <li class="list-group-item list-group-item-action">{{ gameFound.name }}</li>
+                </a>
+            {% endfor %}
+        {% endif %}
+
+        {% if genres|length > 0 %}
+            <li class="list-group-item text-center">----GENRES----</li>
+            {% for genreFound in genres %}
+                <a href="{{ path('app_game_by_genre', {'slug': genreFound.slug }) }}">
+                <li class="list-group-item list-group-item-action">{{ genreFound.name }}</li>
+                </a>
+            {% endfor %}
+        {% endif %}
+
+        {% if publishers|length > 0 %}
+            <li class="list-group-item text-center">----EDITEURS----</li>
+            {% for publishers in publishers %}
+                <a href="{{ path('app_showPublisher', {'slug': publishers.slug }) }}">
+                <li class="list-group-item list-group-item-action">{{ publishers.name }}</li>
+                </a>
+            {% endfor %}
+        {% endif %}
     {% endif %}
 </ul>
