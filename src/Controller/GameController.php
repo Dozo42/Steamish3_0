@@ -6,6 +6,7 @@ use App\Repository\CommentRepository;
 use App\Repository\CountryRepository;
 use App\Repository\GameRepository;
 use App\Repository\GenreRepository;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -78,11 +79,13 @@ class GameController extends AbstractController
     }
 
     #[Route('/ajax/search_engine/{research}', name:'app_research')]
-    public function ajaxResearch($research): Response {
+    public function ajaxResearch($research): JsonResponse {
 
         $gameEntity = $this->gameRepository->getGamesByAjaxRequest($research);
-        dd($gameEntity);
-        // return $this->render('game/gameLangue.html.twig', [
-        // ]);
+        return (new JsonResponse())->setData([
+            'html' => $this->renderView('common/_search_index.html.twig', [
+                'games' => $gameEntity,
+            ]),
+        ]);
     }
 }
