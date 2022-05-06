@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Account;
 use App\Form\AccountType;
 use App\Repository\AccountRepository;
+use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -36,7 +37,7 @@ class UserController extends AbstractController
         if($form->isSubmitted() && $form->isValid()){
               /** @var Country $country */
               $account = $form->getData();
-              $account->setCreatedAt(new Date());
+              $account->setCreatedAt(new DateTime());
               $account->setWallet(0);
               $em->persist($form->getData());
               $em->flush();
