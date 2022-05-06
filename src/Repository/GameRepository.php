@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Account;
 use App\Entity\Comment;
 use App\Entity\Game;
 use App\Entity\Genre;
@@ -127,6 +128,23 @@ class GameRepository extends ServiceEntityRepository
         ->getQuery()
         ->getResult()
         ;
+    }
+
+    public function getGameRecommandation(Account $account) {
+        //Récupère le genre de jeu le plus joué par l'utilisateur
+        //Si égalité, prend celui avec le plus de temps de jeu
+        //Recommande des jeux qu'il N'A pas et du genre récuperé
+
+        $favGenre = $this->createQueryBuilder('g')
+            ->join(Library::class, 'lib', Join::WITH, 'lib.game = g')
+            ->join('lib.account', 'account')
+            ->join('g.genres', 'genre')
+            ->orderBy('COUNT(g.genres)', 'DESC')
+            ->where('account.id = :id')
+            ->setParameter('id', $account->getId())
+            ;
+
+            return $favGenre;
     }
 
 
