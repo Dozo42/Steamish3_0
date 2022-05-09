@@ -13,9 +13,26 @@
         <li class="nav-item">
           <a class="nav-link" href="{{ path('app_game') }}">{{ 'home.nav.games'|trans }}</a>
         </li>
-        <li class="nav-item">
+        {% if is_granted('ROLE_ADMIN') %}
+        <a class="nav-link" href="{{ path('app_admin') }}">Dashboard</a>
+        {% endif %}
+        {# <li class="nav-item">
           <a class="nav-link" href="{{ path('app_user_index') }}">Utilisateurs</a>
-        </li>
+        </li> #}
+        {% if app.user %}
+             
+          <li class="nav-item p-2 ">
+            <p class="orange m-0">Coucou {{app.user.name}}!</p>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ path('app_logout') }}"><i class="fa-solid fa-user-slash orange"></i></a>
+          </li>
+
+          {% else %}
+          <li class="nav-item">
+            <a class="nav-link" href="{{ path('app_login') }}"><i class="fa-solid fa-user orange"></i></a>
+          </li>
+        {% endif %}
       </ul>
       <form id="form-result" class="d-flex">
         <div style="position: relative;">

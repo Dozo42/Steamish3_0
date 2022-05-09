@@ -16,13 +16,22 @@ class PublisherType extends AbstractType
     {
         $builder
             ->add('name', TextType::class,[
-
+                'label'=> false,
+                'attr' => [
+                    'placeholder' => 'Nom',
+                ]
             ])
             ->add('website', TextType::class,[
-
+                'label'=> false,
+                'attr' => [
+                    'placeholder' => 'Website',
+                ]
             ])
             ->add('slug', TextType::class,[
-
+                'label'=> false,
+                'attr' => [
+                    'placeholder' => 'Slug',
+                ]
             ])
             ->add('country', EntityType::class, [
                 'class'=>Country::class, 
