@@ -46,15 +46,16 @@ class AccountRepository extends ServiceEntityRepository
         ;
     }
 
-    public function getAccountsPlayTime() 
+    public function getAccountsPlayTime(): array
     {
         return $this->createQueryBuilder('t')
-        ->select('t', 'lib')
+        // acount.*, 
+        ->select('t', 'SUM(lib.gameTime)')
         ->leftJoin('t.libraries', 'lib')
-        ->groupBy('lib.account')
-
+        ->groupBy('t')
+        ->orderBy('SUM(lib.gameTime)', 'DESC')
         ->getQuery()
-        ->getOneOrNullResult()
+        ->getResult()[0]
         ;
     }
 

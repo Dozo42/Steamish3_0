@@ -68,10 +68,19 @@ class UserController extends AbstractController
 
     }
 
+    #[Route('/funfact', name: 'app_funfact')]
+    public function mostPlayTime(): Response
+    {
+        dd($this->accountRepository->getAccountsPlayTime());
+        return $this->render('home/funfact.html.twig', [
+            'mostTime'=> $this->accountRepository->getAccountsPlayTime()
+        ]);
+    }
 
     #[Route('/{name}', name: 'app_user')]
     public function show(string $name): Response
     {
+        
         return $this->render('user/showAccount.html.twig', [
             'account' => $this->accountRepository->getAccountAllDetails($name)
         ]);
