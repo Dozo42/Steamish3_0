@@ -1,8 +1,10 @@
 {% extends 'base.html.twig' %}
 
 {% block content %}
-<p>Je suis sur la base admin</p>
-    {% block body%}
-    {% endblock %}
+
+{% include "common/_sidebar.html.twig" %}
+
+{% block body%}
+{% endblock %}
 
 {% endblock %}
