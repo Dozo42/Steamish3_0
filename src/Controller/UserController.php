@@ -11,7 +11,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Validator\Constraints\Date;
 
 #[Route('/utilisateur')]
 class UserController extends AbstractController
@@ -21,7 +20,7 @@ class UserController extends AbstractController
         
     }
 
-    #[Route('/', name: 'app_user_index')]
+    #[Route('/admin/utilisateur', name: 'app_user_index')]
     public function indexAccount(): Response
     {
         return $this->render('user/index.html.twig', [
@@ -29,7 +28,7 @@ class UserController extends AbstractController
         ]);
     }
     
-    #[Route('/nouveau', name: 'app_new_user')]
+    #[Route('/admin/utilisateur/nouveau', name: 'app_new_user')]
     public function createAccount(Request $request, EntityManagerInterface $em): Response
     {
         $form =$this->createForm(AccountType::class, new Account());
@@ -49,7 +48,7 @@ class UserController extends AbstractController
 
     }
 
-    #[Route('/modifier/{name}', name: 'app_mod_user')]
+    #[Route('/admin/utilisateur/modifier/{name}', name: 'app_mod_user')]
     public function edit(Account $account, Request $request, EntityManagerInterface $em, string $name): Response
     {
         $form =$this->createForm(AccountType::class, $account);
@@ -68,16 +67,16 @@ class UserController extends AbstractController
 
     }
 
-    #[Route('/funfact', name: 'app_funfact')]
+    /* #[Route('/funfact', name: 'app_funfact')]
     public function mostPlayTime(): Response
     {
         dd($this->accountRepository->getAccountsPlayTime());
         return $this->render('home/funfact.html.twig', [
             'mostTime'=> $this->accountRepository->getAccountsPlayTime()
         ]);
-    }
+    } */
 
-    #[Route('/{name}', name: 'app_user')]
+    #[Route('/utilisateur/{name}', name: 'app_user')]
     public function show(string $name): Response
     {
         
