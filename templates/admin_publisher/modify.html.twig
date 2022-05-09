@@ -1,0 +1,27 @@
+{% extends 'base-admin.html.twig' %}
+
+{% block title %}Admin : Modifier {{ publisher.name }}{% endblock %}
+
+{% block body %}
+<div class="container my-4">
+    {# <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{ path('app_home') }}">Accueil</a></li>
+        <li class="breadcrumb-item"><a href="{{ path('app_user_index') }}">Utilisateurs</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Nouvel Utilisateur</li>
+    </ol> #}
+    
+    <div class="d-flex">
+        <h2 class="mb-3">Modifier {{ publisher.name }}</h2>
+    </div>
+
+    <div class="col-4">
+        {{form_start(form)}}
+            {{form_row(form.name)}}
+            {{form_row(form.website)}}
+            {{form_row(form.slug)}}
+            {{form_row(form.country)}}
+            <button type="submit" class="btn btn-success">Soumettre</button>
+        {{form_end(form)}}
+    </div>
+</div>
+{% endblock %}

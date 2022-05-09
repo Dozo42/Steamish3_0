@@ -33,7 +33,7 @@ class AdminGenreController extends AbstractController
     public function show(string $slug): Response
     {
         return $this->render('admin_genre/show.html.twig', [
-            'genre' => $this->genreRepository->getGamesByGenre($slug)
+            'genre' => $this->genreRepository->findOneBy(['slug' => $slug])
         ]);
     }
 
@@ -56,7 +56,7 @@ class AdminGenreController extends AbstractController
     }
 
     #[Route('/admin/genre/modifier/{slug}', name: 'app_admin_genre_modify')]
-    public function modify(Genre $genre, string $slug, Request $request): Response
+    public function modify(Genre $genre, Request $request): Response
     {
         $form = $this->createForm(GenreType::class, $genre);
         $form->handleRequest($request);
@@ -69,7 +69,7 @@ class AdminGenreController extends AbstractController
 
         return $this->render('admin_genre/modify.html.twig', [
             'form' => $form->createView(),
-            'genre' => $this->genreRepository->findOneBy(['slug' => $slug])
+            'genre' => $genre
         ]);
     }
 
