@@ -11,7 +11,15 @@
                 }) }}</b></a>
                     {% endif %}
                 </p>
-                {{ comment.note}}
+                {# {% dump(comment)  %} #}
+                {% if comment.note %}
+                    <div>
+                        {% for i in 1..comment.note %}
+                            <i class="fa-solid fa-star orange"></i>
+                        {% endfor %}
+                    </div>    
+                {% endif %}
+
             </div>
             <p class="pe-2">{{ comment.content }}</p>
             <div class="d-flex justify-content-end pe-4">

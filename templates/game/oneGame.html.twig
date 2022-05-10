@@ -69,9 +69,16 @@
             </div>
             {% if app.user %}
             {% if commentAccount==null  %}
+         
             {{ form_start(form) }}
                 {{ form_row(form.content) }}
-                <div class="col-2">{{ form_row(form.note) }}</div>
+                <div class="col-2 d-flex mb-4" >
+                    <i class="fa-solid fa-star orange stars-form" data-value="1"></i>
+                    <i class="fa-solid fa-star orange stars-form" data-value="2"></i>
+                    <i class="fa-solid fa-star orange stars-form" data-value="3"></i>
+                    <i class="fa-solid fa-star orange stars-form" data-value="4"></i>
+                    <i class="fa-solid fa-star orange stars-form" data-value="5"></i>
+                </div>
                 <button type="submit" class="btn btn-success mb-2">Soumettre</button>
             {{ form_end(form) }}
             {% endif %}

@@ -52,17 +52,15 @@ class GameController extends AbstractController
     {
         $user= $this->getUser();
         $game= $this->gameRepository->findOneBy(['slug' => $slug]);
-        dump($user);
+       
         $gameEntity = $this->gameRepository->getGameAllDetails($slug);
         $similarGames = ($this->gameRepository->getSimilarGames($gameEntity));
         $newComment = new Comment();
-        dump('encore ici');
+        
         if($user===null){
-            dump('ici');
-
+          
             $commentAccount=null;
         }else{
-            dump('la');
             $commentAccount = $this->commentRepository->getOneByGameAndAccount($game, $user);
         }
         $form =$this->createForm(CommentType::class, $newComment);
