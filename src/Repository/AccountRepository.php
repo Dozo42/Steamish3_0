@@ -58,6 +58,4 @@ class AccountRepository extends ServiceEntityRepository
         ->getResult()[0]
         ;
     }
-
-
 }

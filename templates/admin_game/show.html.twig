@@ -1,13 +1,12 @@
-{% extends 'base-front.html.twig' %}
+{% extends 'base-admin.html.twig' %}
 
-{% block title %}{{ parent() }}/Jeux{% endblock %}
+{% block title %}Admin : {{ game.name }}{% endblock %}
 
-{% block body %}
-<div class="container mt-4">
+{% block body %}<div class="container mt-4">
     <nav class="m-2" aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ path('app_home') }}">Accueil</a></li>
-            <li class="breadcrumb-item"><a href="{{ path('app_game') }}">Tout les jeux</a></li>
+            <li class="breadcrumb-item"><a href="{{ path('app_admin_game') }}">Tout les jeux</a></li>
             <li class="breadcrumb-item active" aria-current="page">{{game.name}}</li>
         </ol>
     </nav>
@@ -51,38 +50,24 @@
         </div>
     </div>
 </div>
-{# commentaires #}
 
 
-<div class="comment-section pb-4 pt-4">
-
-    <div class="container px-0">
-        <div class="row">
-            <div class="d-flex justify-content-between align-items-center mb-4">
-                <h5 class="m-0">Avis pour {{game.name}}</h1>
-                    <div><a class="btn btn-sm btn-outline-light" href="{{path('app_avis', {'slug': game.slug})}}"><i
-                                class="fa-solid fa-plus"></i></a></div>
+    <div class="modal fade" id="exampleModal{{game.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Suppression</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            {% for comment in game.comments|slice(0, 6)  %}
-            {% include "common/_cardComment.html.twig" with 
-            {
-                'oneGameDisplay': true
-            } %}
-            {% endfor %}
+            <div class="modal-body">
+                Êtes vous sûr de vouloir supprimer {{game.name}} ?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Non</button>
+                {# <a href="{{ path('app_admin_game_delete', {'id': game.id}) }}" class="btn btn-primary">Supprimer !</a> #}
+            </div>
+            </div>
         </div>
     </div>
-</div>
-
-{# jeux similaires #}
-<div class="container">
-    <div class="d-flex justify-content-between align-items-center my-4">
-        <h1 class="mb-1">Jeux similaires</h1>
-    </div>
-    <div class="row">
-        {% for game in similar|slice(0, 4) %}
-        {% include "common/_cardGame.html.twig" %}
-        {% endfor %}
-    </div>
-</div>
 
 {% endblock %}

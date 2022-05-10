@@ -1,0 +1,58 @@
+{% extends 'base-admin.html.twig' %}
+
+{% block title %}Admin Jeux{% endblock %}
+
+{% block body %}
+
+<div class="container my-4">
+    <nav class="m-2 mt-4" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ path('app_home') }}">Accueil</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Jeux</li>
+        </ol>
+    </nav>
+    <div class="d-flex justify-content-between">
+        <h2 class="mb-3">Jeux</h2>
+        {# <a class="btn btn-sm btn-outline-light mb-3 mt-2 " href="{{ path('app_admin_game_add')}}"><i class="fa-solid fa-plus"></i></a> #}
+    </div>
+    <table class="table table-dark table-hover table-striped border border-light border-2">
+        <thead>
+            <tr>
+                <th scope="col col-2">Nom</th>
+                <th scope="col col-2">Prix</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for game in games %}
+                <!-- Modal -->
+            <div class="modal fade" id="exampleModal{{game.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Suppression</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Êtes vous sûr de vouloir supprimer {{game.name}} ?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Non</button>
+                        {# <a href="{{ path('app_admin_game_delete', {'id': game.id}) }}" class="btn btn-primary">Supprimer !</a> #}
+                    </div>
+                    </div>
+                </div>
+            </div>
+            <tr>
+                <th>{{ game.name }}</th>
+                <th>
+                <a href="{{ path('app_admin_game_detail', {'slug': game.slug }) }}"><i class="green fa-solid fa-circle-info"></i></a>
+                {# <a href="{{ path('app_admin_game_modify', {'slug': game.slug }) }}"><i class="orange fa-solid fa-pencil"></i></a> #}
+                <a href="" data-bs-toggle="modal" data-bs-target="#exampleModal{{game.id}}"><i class="red fa-solid fa-trash-can"></i></a>
+                </th>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}
