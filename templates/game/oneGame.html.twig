@@ -23,7 +23,8 @@
                 <div class="card-body">
                     <h2 class="card-title">{{ game.name }}</h2>
                     {% if game.publisher %}
-                    <a class="card-text" href='{{ path('app_showPublisher', {'slug':game.publisher.slug}) }}'>{{ game.publisher.name }}</a>
+                    <a class="card-text"
+                        href='{{ path('app_showPublisher', {'slug':game.publisher.slug}) }}'>{{ game.publisher.name }}</a>
                     {% endif %}
                     <p class="card-text"><small class="text-muted">Publié le
                             {{ game.publishedAt |date("m F Y") }}</small>
@@ -34,7 +35,8 @@
                     <hr>
                     <div class="d-flex">
                         {% for genre in game.genres %}
-                        <a class="btn btn-sm btn-outline-light me-2 align-middle" href="{{ path('app_game_by_genre', {'slug': genre.slug}) }}">{{ genre.name }}</a>
+                        <a class="btn btn-sm btn-outline-light me-2 align-middle"
+                            href="{{ path('app_game_by_genre', {'slug': genre.slug}) }}">{{ genre.name }}</a>
                         {# <p class="card-text me-2 align-middle">{{ genre.name }}</p> #}
                         {% endfor %}
                     </div>
@@ -42,7 +44,8 @@
                     <div class="d-flex my-0">
                         {% for langue in game.countries %}
                         <div class="me-2">
-                            <a href="{{ path('app_game_by_langue', {'slug': langue.slug}) }}"><img src=" {{ langue.urlFlag }}" alt="{{ langue.nationality }}"></a>
+                            <a href="{{ path('app_game_by_langue', {'slug': langue.slug}) }}"><img
+                                    src=" {{ langue.urlFlag }}" alt="{{ langue.nationality }}"></a>
                         </div>
                         {% endfor %}
                     </div>
@@ -52,19 +55,27 @@
     </div>
 </div>
 {# commentaires #}
-{% if  %}
 
-{% endif %}
 
 <div class="comment-section pb-4 pt-4">
 
     <div class="container px-0">
         <div class="row">
+
             <div class="d-flex justify-content-between align-items-center mb-4">
                 <h5 class="m-0">Avis pour {{game.name}}</h1>
                     <div><a class="btn btn-sm btn-outline-light" href="{{path('app_avis', {'slug': game.slug})}}"><i
                                 class="fa-solid fa-plus"></i></a></div>
             </div>
+            {% if app.user %}
+            {% if commentAccount==null  %}
+            {{ form_start(form) }}
+                {{ form_row(form.content) }}
+                <button type="submit" class="btn btn-success">Soumettre</button>
+            {{ form_end(form) }}
+            {% endif %}
+            {% endif %}
+            
             {% for comment in game.comments|slice(0, 6)  %}
             {% include "common/_cardComment.html.twig" with 
             {

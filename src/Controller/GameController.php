@@ -52,12 +52,19 @@ class GameController extends AbstractController
     {
         $user= $this->getUser();
         $game= $this->gameRepository->findOneBy(['slug' => $slug]);
-
+        dump($user);
         $gameEntity = $this->gameRepository->getGameAllDetails($slug);
         $similarGames = ($this->gameRepository->getSimilarGames($gameEntity));
-        $comment = $this->commentRepository->getOneByGameAndAccount( $game, $user );
         $newComment = new Comment();
-        $commentAccount = $this->commentRepository->getOneByGameAndAccount($game, $user);
+        dump('encore ici');
+        if($user===null){
+            dump('ici');
+
+            $commentAccount=null;
+        }else{
+            dump('la');
+            $commentAccount = $this->commentRepository->getOneByGameAndAccount($game, $user);
+        }
         $form =$this->createForm(CommentType::class, $newComment);
         $form->handleRequest($request);
         
@@ -69,13 +76,14 @@ class GameController extends AbstractController
             $newComment->setGame($game);
             $em->persist($form->getData());
             $em->flush();
+            return $this->redirectToRoute('app_one_game', ['slug' => $slug]);
         }
 
         return $this->render('game/oneGame.html.twig', [
             'game' => $gameEntity,
             'similar'=> $similarGames,
-            'comment'=>$comment,
-            'form'=>$form->createView()
+            'form'=>$form->createView(),
+            'commentAccount'=>$commentAccount
         ]);
     }
 
