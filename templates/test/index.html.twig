@@ -3,14 +3,21 @@
 {% block title %}Hello TestController!{% endblock %}
 
 {% block body %}
-<div class="container my-4">
+<h1>{{ pagination.getTotalItemCount}}</h1>
+    {% for account in pagination %}
+   <p>{{account.name}}</p> 
+    {% endfor %}
+<div class="pagination">{{ knp_pagination_render(pagination)}}</div>
+    
+
+{# <div class="container my-4"> #}
     {# <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{ path('app_home') }}">Accueil</a></li>
         <li class="breadcrumb-item"><a href="{{ path('app_user_index') }}">Utilisateurs</a></li>
         <li class="breadcrumb-item active" aria-current="page">Nouvel Utilisateur</li>
     </ol> #}
     
-    <div class="d-flex">
+    {# <div class="d-flex">
         <h2 class="mb-3">Nouvel Editeur</h2>
     </div>
 
@@ -23,5 +30,5 @@
         <button type="submit" class="btn btn-success">Soumettre</button>
         {{form_end(form)}}
     </div>
-</div>
+</div> #}
 {% endblock %}

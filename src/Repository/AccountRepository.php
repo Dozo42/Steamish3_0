@@ -59,5 +59,10 @@ class AccountRepository extends ServiceEntityRepository
         ;
     }
 
+    public function getQbAll()
+    {
+        return $this->createQueryBuilder('a');
+        
+    }
 
 }

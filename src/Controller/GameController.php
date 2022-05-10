@@ -2,13 +2,20 @@
 
 namespace App\Controller;
 
+use App\Entity\Comment;
+use App\Form\CommentType;
+use App\Repository\AccountRepository;
 use App\Repository\CommentRepository;
 use App\Repository\CountryRepository;
 use App\Repository\GameRepository;
 use App\Repository\GenreRepository;
 use App\Repository\PublisherRepository;
+use DateTime;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -21,10 +28,13 @@ class GameController extends AbstractController
             private CommentRepository $commentRepository,
             private GenreRepository $genreRepository,
             private CountryRepository $countryRepository,
-            private PublisherRepository $publisherRepository
+            private PublisherRepository $publisherRepository,
+            private AccountRepository $accountRepository
             ) {
         $this->gameRepository = $gameRepository;
         $this->commentRepository = $commentRepository;
+        $this->accountRepository = $accountRepository;
+        
     }
 
     #[Route('/', name: 'app_game')]
@@ -38,14 +48,34 @@ class GameController extends AbstractController
     }
 
     #[Route('/{slug}', name: 'app_one_game')]
-    public function oneGame($slug = ''): Response 
+    public function oneGame($slug = '', Request $request, EntityManagerInterface $em): Response 
     {
+        $user= $this->getUser();
+        $game= $this->gameRepository->findOneBy(['slug' => $slug]);
+
         $gameEntity = $this->gameRepository->getGameAllDetails($slug);
         $similarGames = ($this->gameRepository->getSimilarGames($gameEntity));
-        // dd($gameEntity);
+        $comment = $this->commentRepository->getOneByGameAndAccount( $game, $user );
+        $newComment = new Comment();
+        $commentAccount = $this->commentRepository->getOneByGameAndAccount($game, $user);
+        $form =$this->createForm(CommentType::class, $newComment);
+        $form->handleRequest($request);
+        
+        if($form->isSubmitted() && $form->isValid()){
+            $newComment->setUpVotes(0);
+            $newComment->setDownVotes(0);
+            $newComment->setCreatedAt(new DateTime());
+            $newComment->setAccount($user);
+            $newComment->setGame($game);
+            $em->persist($form->getData());
+            $em->flush();
+        }
+
         return $this->render('game/oneGame.html.twig', [
             'game' => $gameEntity,
-            'similar'=> $similarGames
+            'similar'=> $similarGames,
+            'comment'=>$comment,
+            'form'=>$form->createView()
         ]);
     }
 
@@ -89,9 +119,9 @@ class GameController extends AbstractController
 
         return (new JsonResponse())->setData([
             'html' => $this->renderView('common/_search_index.html.twig', [
-                'games' => $gameEntities,
-                'genres' => $genreEntities,
-                'publishers' => $publisherEntities
+            'games' => $gameEntities,
+            'genres' => $genreEntities,
+            'publishers' => $publisherEntities
             ]),
         ]);
     }
