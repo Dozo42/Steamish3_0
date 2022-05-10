@@ -147,5 +147,8 @@ class GameRepository extends ServiceEntityRepository
             return $favGenre;
     }
 
+    public function getQbAll() {
+        return $this->createQueryBuilder('g');
+    }
 
  }

@@ -39,3 +39,14 @@ a {
     color:$yellow;
 }
 }
+
+.checkboxes-template{
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+
+  div{
+    margin : 1rem 2rem;
+  }
+}

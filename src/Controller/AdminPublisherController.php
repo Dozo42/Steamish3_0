@@ -76,7 +76,7 @@ class AdminPublisherController extends AbstractController
         ]);
     }
 
-    #[Route('/admin/editeur/delete/{id}', name: 'app_admin_publisher_delete')]
+    #[Route('/admin/editeur/supprimer/{id}', name: 'app_admin_publisher_delete')]
     public function delete(int $id): Response
     {
         $publisherEntity = $this->publisherRepository->find($id);

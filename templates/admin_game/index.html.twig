@@ -13,7 +13,7 @@
     </nav>
     <div class="d-flex justify-content-between">
         <h2 class="mb-3">Jeux</h2>
-        {# <a class="btn btn-sm btn-outline-light mb-3 mt-2 " href="{{ path('app_admin_game_add')}}"><i class="fa-solid fa-plus"></i></a> #}
+        <a class="btn btn-sm btn-outline-light mb-3 mt-2 " href="{{ path('app_admin_game_add')}}"><i class="fa-solid fa-plus"></i></a>
     </div>
     <table class="table table-dark table-hover table-striped border border-light border-2">
         <thead>
@@ -23,7 +23,7 @@
             </tr>
         </thead>
         <tbody>
-            {% for game in games %}
+            {% for game in pagination %}
                 <!-- Modal -->
             <div class="modal fade" id="exampleModal{{game.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
@@ -37,7 +37,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Non</button>
-                        {# <a href="{{ path('app_admin_game_delete', {'id': game.id}) }}" class="btn btn-primary">Supprimer !</a> #}
+                        <a href="{{ path('app_admin_game_delete', {'id': game.id}) }}" class="btn btn-primary">Supprimer !</a>
                     </div>
                     </div>
                 </div>
@@ -46,13 +46,16 @@
                 <th>{{ game.name }}</th>
                 <th>
                 <a href="{{ path('app_admin_game_detail', {'slug': game.slug }) }}"><i class="green fa-solid fa-circle-info"></i></a>
-                {# <a href="{{ path('app_admin_game_modify', {'slug': game.slug }) }}"><i class="orange fa-solid fa-pencil"></i></a> #}
+                <a href="{{ path('app_admin_game_modify', {'slug': game.slug }) }}"><i class="orange fa-solid fa-pencil"></i></a>
                 <a href="" data-bs-toggle="modal" data-bs-target="#exampleModal{{game.id}}"><i class="red fa-solid fa-trash-can"></i></a>
                 </th>
             </tr>
             {% endfor %}
         </tbody>
     </table>
+    <div class="text-center">
+        {{knp_pagination_render(pagination)}}
+    </div>
 </div>
 
 {% endblock %}
