@@ -11,21 +11,23 @@
         </ol>
     </nav>
     {# card du jeux #}
+    <div class="my-4">
+        <a class="btn btn-sm btn-outline-light mb-3 mt-2 " href="{{ path('app_admin_game_modify', {'slug': game.slug})}}"><i class="orange fa-solid fa-pencil"></i></a>
+        <a class="btn btn-sm btn-outline-light mb-3 mt-2 " href="" data-bs-toggle="modal" data-bs-target="#exampleModal{{game.id}}"><i class="red fa-solid fa-trash-can"></i></a>
+    </div>
     <div class="card mx-auto mt-4 mb-4 col-12 border-2 rounded">
-
-
         <div class="row g-0">
             <div class="col-md-4 view">
-                <img src="{{ game.thumbnailCover}}" class="img-fluid " alt="{{ game.name }}">
+                <img src="{{ game.thumbnailCover}}" class="img-fluid" alt="{{ game.name }}">
             </div>
             <div class="col-md-8 view">
                 <div class="card-body">
                     <h2 class="card-title">{{ game.name }}</h2>
                     {% if game.publisher %}
-                    <a class="card-text" href='{{ path('app_showPublisher', {'slug':game.publisher.slug}) }}'>{{ game.publisher.name }}</a>
+                        <a class="card-text" href='{{ path('app_admin_publisher_detail', {'slug':game.publisher.slug}) }}'>{{ game.publisher.name }}</a>
                     {% endif %}
                     <p class="card-text"><small class="text-muted">Publié le
-                            {{ game.publishedAt |date("m F Y") }}</small>
+                        {{ game.publishedAt |date("m F Y") }}</small>
                     </p>
                     <h3 class="card-text">{{ game.price }}€</h3>
                     <hr>
@@ -34,7 +36,6 @@
                     <div class="d-flex">
                         {% for genre in game.genres %}
                         <a class="btn btn-sm btn-outline-light me-2 align-middle" href="{{ path('app_game_by_genre', {'slug': genre.slug}) }}">{{ genre.name }}</a>
-                        {# <p class="card-text me-2 align-middle">{{ genre.name }}</p> #}
                         {% endfor %}
                     </div>
                     <hr>
@@ -64,7 +65,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Non</button>
-                {# <a href="{{ path('app_admin_game_delete', {'id': game.id}) }}" class="btn btn-primary">Supprimer !</a> #}
+                <a href="{{ path('app_admin_game_delete', {'id': game.id}) }}" class="btn btn-primary">Supprimer !</a>
             </div>
             </div>
         </div>

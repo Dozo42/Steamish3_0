@@ -27,7 +27,7 @@
                 <tbody>
                     {% for game in publisher.games %}
                     <tr>
-                        <th>{{ game.name }}</th>
+                        <th><a href="{{path('app_admin_game_detail', {'slug': game.slug})}}">{{ game.name }}</a></th>
                         <th>{{ game.price }}€</th>
                     </tr>
                     {% endfor %}
