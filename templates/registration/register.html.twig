@@ -1,0 +1,30 @@
+{% extends 'base-front.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block body %}
+<div class="container my-4">
+    <div class="col-4">
+        <nav class="m-2" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ path('app_home') }}">Accueil</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Nouveau compte</li>
+            </ol>
+        </nav>
+        <h1>Enregistrement</h1>
+
+        {{ form_start(registrationForm) }}
+        {{ form_row(registrationForm.name) }}
+        {{ form_row(registrationForm.email) }}
+        {{ form_row(registrationForm.nickname) }}
+        {{ form_row(registrationForm.slug) }}
+        {{ form_row(registrationForm.plainPassword) }}
+        {{ form_row(registrationForm.agreeTerms, {
+            label: 'Termes et Conditions'
+        }) }}
+
+        <button type="submit" class="btn btn-success">Soumettre</button>
+        {{ form_end(registrationForm) }}
+    </div>
+</div>
+{% endblock %}
