@@ -71,7 +71,8 @@
             {% if commentAccount==null  %}
             {{ form_start(form) }}
                 {{ form_row(form.content) }}
-                <button type="submit" class="btn btn-success">Soumettre</button>
+                <div class="col-2">{{ form_row(form.note) }}</div>
+                <button type="submit" class="btn btn-success mb-2">Soumettre</button>
             {{ form_end(form) }}
             {% endif %}
             {% endif %}
