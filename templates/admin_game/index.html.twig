@@ -3,13 +3,12 @@
 {% block title %}Admin Jeux{% endblock %}
 
 {% block body %}
-{{pagination.getTotalItemCount}}
 <div class="container my-4">
     <div class="col-10">
 
         <nav class="m-2 mt-4" aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{ path('app_home') }}">Accueil</a></li>
+                <li class="breadcrumb-item"><a href="{{ path('app_admin') }}">Accueil</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Jeux</li>
             </ol>
         </nav>
