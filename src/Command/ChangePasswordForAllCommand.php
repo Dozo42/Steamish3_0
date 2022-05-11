@@ -31,8 +31,7 @@ class ChangePasswordForAllCommand extends Command
 
     protected function configure(): void
     {
-        $this
-            ->addArgument('password', InputArgument::OPTIONAL, 'password')
+        $this->addArgument('password', InputArgument::REQUIRED, 'password')
         ;
     }
 
