@@ -47,6 +47,13 @@ class MessageRepository extends ServiceEntityRepository
         }
     }
 
+    public function getQbAll(int $id) {
+        return $this->createQueryBuilder('m')
+            ->join('m.topic', 't')
+            ->where('t.id = :id')
+            ->setParameter('id', $id);
+    }
+
     // /**
     //  * @return Message[] Returns an array of Message objects
     //  */

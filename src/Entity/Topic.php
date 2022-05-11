@@ -29,7 +29,7 @@ class Topic
     #[ORM\JoinColumn(nullable: false)]
     private $forum;
 
-    #[ORM\OneToMany(mappedBy: 'topic', targetEntity: Message::class)]
+    #[ORM\OneToMany(mappedBy: 'topic', targetEntity: Message::class, cascade: ['all'])]
     private $messages;
 
     public function __construct()

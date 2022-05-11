@@ -1,0 +1,79 @@
+{% extends 'base-front.html.twig' %}
+
+{% block title %}{{topic.title}}{% endblock %}
+
+{% block body %}
+
+    <div class="container my-4">
+        <nav class="m-2 mt-4" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ path('app_home') }}">Accueil</a></li>
+                <li class="breadcrumb-item"><a href="{{ path('app_forum') }}">Forums</a></li>
+                <li class="breadcrumb-item"><a href="{{ path('app_forum_topic', {'id': topic.forum.id}) }}">{{topic.forum.title}}</a></li>
+                <li class="breadcrumb-item active" aria-current="page">{{topic.title}}</li>
+            </ol>
+        </nav>
+        <div>
+            <h2 class="mb-3">Sujet : {{topic.title}}</h2>
+            <p class="small">Créer le {{topic.createdAt|date('d/m/y')}} par <a href="{{path('app_user', {'name': topic.createdBy.name})}}">{{topic.createdBy.name}}</a></p>
+        </div>
+        <hr>
+    </div>
+    <div class="comment-section py-3">
+
+        <div class="container">
+            <div class="row">
+                {% for message in pagination %}
+                {# MODAL #}
+                <div class="modal fade" id="exampleModal{{message.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Suppression</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            Êtes vous sûr de vouloir supprimer le message de {{message.createdBy.nickname}} ?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Non</button>
+                            <a href="{{path('app_message_delete', {'id': message.id, 'forumId': topic.forum.id})}}" class="btn btn-primary">Supprimer !</a>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 py-2">
+                        <div class="cardcomment">
+                            <div class="ps-3 py-3">
+                                <div class="pe-4 d-flex justify-content-between">
+                                    <p>Créer par <a href="{{path('app_user', {'name': topic.createdBy.name})}}">{{message.createdBy.nickname}}</a> le {{message.createdAt|date('d/m/y')}}</p>
+                                    {% if app.user and user.id == message.createdBy.id %}
+                                        <div>
+                                            <a href="{{path('app_message_modify', {'id': message.id, 'forumId': topic.forum.id})}}"><i class="orange fa-solid fa-pencil"></i></a>
+                                            <a href="" data-bs-toggle="modal" data-bs-target="#exampleModal{{message.id}}"><i class="red fa-solid fa-trash-can"></i></a>
+                                        </div>
+                                    {% endif %}
+                                </div>
+                                <p class="pe-2">{{ message.content }}</p>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+                {% if app.user %}
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 py-2" >
+                        {{form_start(form)}}
+                            <p>Participez à ce topic !</p>
+                            {{form_row(form.content)}}
+                            <button type="submit" class="btn btn-success mb-2">Envoyer</button>
+                        {{form_end(form)}}
+                    </div>
+                {% else %}
+                    <p><a href="{{path('app_login')}}">Connectez-vous</a> pour intéragir avec ce topic.</p>
+                {% endif %}
+            </div>
+        </div>
+    
+    </div>
+    
+
+{% endblock %}

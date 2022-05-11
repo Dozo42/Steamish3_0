@@ -1,0 +1,23 @@
+{% extends 'base-front.html.twig' %}
+
+{% block title %}Ajout Topic{% endblock %}
+
+{% block body %}
+<div class="container my-4">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{ path('app_home') }}">Accueil</a></li>
+        <li class="breadcrumb-item"><a href="{{ path('app_forum') }}">Forums</a></li>
+        <li class="breadcrumb-item"><a href="{{ path('app_forum_topic', {'id': forum.id}) }}">{{forum.title}}</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Nouveau topic</li>
+    </ol>
+    
+    <div class="d-flex">
+        <h2 class="mb-3">Nouveau topic</h2>
+    </div>
+        {{form_start(form)}}
+            {{form_row(form.title)}}
+            <button type="submit" class="btn btn-success">Soumettre</button>
+        {{form_end(form)}}
+    </div>
+</div>
+{% endblock %}

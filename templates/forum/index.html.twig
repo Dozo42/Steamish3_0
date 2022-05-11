@@ -25,7 +25,7 @@
         <tbody>
             {% for forum in pagination %}
             <tr>
-                <th>{{ forum.title }}</th>
+                <th><a href="{{path('app_forum_topic', {'id': forum.id})}}">{{ forum.title }}</a></th>
                 <td>{{ forum.topics|length }}</td>
             </tr>
             {% endfor %}
