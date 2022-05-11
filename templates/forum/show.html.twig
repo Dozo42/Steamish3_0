@@ -1,0 +1,69 @@
+{% extends 'base-front.html.twig' %}
+
+{% block title %}Topics : {{forum.title}}{% endblock %}
+
+{% block body %}
+
+
+<div class="container my-4">
+    <nav class="m-2 mt-4" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ path('app_home') }}">Accueil</a></li>
+            <li class="breadcrumb-item"><a href="{{ path('app_forum') }}">Forums</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{forum.title}}</li>
+        </ol>
+    </nav>
+    <div class="d-flex justify-content-between">
+        <h2 class="mb-3">Topics : {{forum.title}}</h2>
+        {% if app.user %}
+            <a class="btn btn-sm btn-outline-light mb-3 mt-2 " href="{{ path('app_topic_add', {'forumId': forum.id})}}"><i class="fa-solid fa-plus"></i></a>
+        {% endif %}
+    </div>
+    <table class="table table-dark table-hover table-striped border border-light border-2">
+        <thead>
+            <tr>
+                <th scope="col col-2">Titre</th>
+                <th scope="col col-2">Crée Le</th>
+                <th scope="col col-2">Crée Par</th>
+                <th scope="col col-2">Messages</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for topic in pagination %}
+            <div class="modal fade" id="exampleModal{{topic.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Suppression</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Êtes vous sûr de vouloir supprimer {{topic.title}} ?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Non</button>
+                        <a href="{{ path('app_topic_delete', {'id': topic.id, 'forumId': forum.id})}}" class="btn btn-primary">Supprimer !</a>
+                    </div>
+                    </div>
+                </div>
+            </div>
+            <tr>
+                <td>
+                    <div class="d-flex justify-content-between">
+                            <a href="{{path('app_forum_topic_detail', {'forumId': forum.id, 'topicId': topic.id })}}">{{ topic.title }}</a>
+                        {% if app.user and (is_granted('ROLE_ADMIN') or user.id == topic.createdBy.id )  %}
+                            <a href="" data-bs-toggle="modal" data-bs-target="#exampleModal{{topic.id}}"><i class="red fa-solid fa-trash-can"></i></a>
+                        {% endif %}
+                    </div>
+                </td>
+                <td>{{ topic.createdAt|date('d/m/y') }}</td>
+                <td>{{ topic.createdBy.nickname }}</td>
+                <td>{{ topic.messages|length }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {{ knp_pagination_render(pagination) }}
+</div>
+
+{% endblock %}
