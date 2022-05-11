@@ -362,5 +362,9 @@ class Account implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+    public function incrementNbBanWord() {
+        $this->nbBanWord += 1;
+    }
     
 }

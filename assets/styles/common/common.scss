@@ -33,6 +33,13 @@ a {
 }
 }
 
+.red-bg {
+  background-color: $red;
+  color: $gris;
+  font-size: 1.5rem;
+  text-align: center;
+}
+
 .orange{
   color: $orange;
   &:hover{

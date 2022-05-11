@@ -4,6 +4,11 @@
 {% block body %}
 
 
+{% if app.user and app.user.nbBanWord > 5 %}
+<div class="red-bg">
+    C'EST PAS GENTIL D'ÊTRE MECHANT !!
+</div>
+{% endif %}
 <div class="container my-4">
     <nav class="m-2" aria-label="breadcrumb">
         <ol class="breadcrumb ">
