@@ -2,9 +2,18 @@
 
 {% block content %}
 <header>
-{% include "common/_sidebar.html.twig" %}
+    {% block header %}
+     {% include "common/_navbar.html.twig" %}
+    {% endblock %}
 </header>
-{% block body%}
-{% endblock %}
 
+<div class="row">
+    <div class="col-1">
+        {% include "common/_sidebar.html.twig" %}
+    </div>
+    <div class="col-11">
+        {% block body%}
+        {% endblock %}
+    </div>
+</div>
 {% endblock %}
