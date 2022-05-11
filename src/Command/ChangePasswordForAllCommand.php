@@ -48,7 +48,7 @@ class ChangePasswordForAllCommand extends Command
         
         $this->entityManager->flush();
 
-        $output->writeln('les passord sont changer pour '.COUNT($accountEntities).' comptes');
+        $output->writeln('les password sont changer pour '.COUNT($accountEntities).' comptes');
         return command::SUCCESS;
     }
 }
