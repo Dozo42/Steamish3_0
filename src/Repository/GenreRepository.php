@@ -54,4 +54,8 @@ class GenreRepository extends ServiceEntityRepository
         ->getResult()
         ;
     }
+
+    public function getQbAll() {
+        return $this->createQueryBuilder('g');
+    }
 }

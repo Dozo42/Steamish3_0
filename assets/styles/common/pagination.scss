@@ -1,0 +1,26 @@
+.pagination{
+
+    font-size: 15px;
+    color: $orange;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    span {
+        margin-left: 5px;
+        margin-right: 5px;
+        border: 2px solid white;
+        border-radius: 25%;
+        padding: 0 0.3rem 0 0.3rem;
+        background-color: $bleuNuit;
+
+    }
+
+    a{
+        color: $gris;
+        text-decoration: none;
+        &:hover{
+            cursor: pointer;
+        }
+    }
+}
