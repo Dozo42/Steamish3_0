@@ -22,11 +22,11 @@ class DirectMessage
     #[ORM\Column(type: 'boolean')]
     private $hasBeenSeen;
 
-    #[ORM\ManyToOne(targetEntity: Account::class, inversedBy: 'directMessages')]
+    #[ORM\ManyToOne(targetEntity: Account::class, inversedBy: 'messagesSent')]
     #[ORM\JoinColumn(nullable: false)]
-    private $createdBy;
+    private $createBy;
 
-    #[ORM\ManyToOne(targetEntity: Account::class, inversedBy: 'directMessages')]
+    #[ORM\ManyToOne(targetEntity: Account::class, inversedBy: 'messagesReceived')]
     #[ORM\JoinColumn(nullable: false)]
     private $receiver;
 
@@ -71,14 +71,14 @@ class DirectMessage
         return $this;
     }
 
-    public function getCreatedBy(): ?Account
+    public function getCreateBy(): ?Account
     {
-        return $this->createdBy;
+        return $this->createBy;
     }
 
-    public function setCreatedBy(?Account $createdBy): self
+    public function setCreateBy(?Account $createBy): self
     {
-        $this->createdBy = $createdBy;
+        $this->createBy = $createBy;
 
         return $this;
     }

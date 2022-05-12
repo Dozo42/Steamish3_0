@@ -59,8 +59,11 @@ class Account implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'integer', nullable: true)]
     private $nbBanWord;
 
-    #[ORM\OneToMany(mappedBy: 'createdBy', targetEntity: DirectMessage::class)]
-    private $directMessages;
+    #[ORM\OneToMany(mappedBy: 'createBy', targetEntity: DirectMessage::class)]
+    private $messagesSent;
+
+    #[ORM\OneToMany(mappedBy: 'receiver', targetEntity: DirectMessage::class)]
+    private $messagesReceived;
 
     public function __construct()
     {
@@ -70,6 +73,8 @@ class Account implements UserInterface, PasswordAuthenticatedUserInterface
         $this->topics = new ArrayCollection();
         $this->messages = new ArrayCollection();
         $this->directMessages = new ArrayCollection();
+        $this->messagesSent = new ArrayCollection();
+        $this->messagesReceived = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -379,22 +384,60 @@ class Account implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->directMessages;
     }
 
-    public function addDirectMessage(DirectMessage $directMessage): self
+    /**
+     * @return Collection<int, DirectMessage>
+     */
+    public function getMessagesSent(): Collection
     {
-        if (!$this->directMessages->contains($directMessage)) {
-            $this->directMessages[] = $directMessage;
-            $directMessage->setCreatedBy($this);
+        return $this->messagesSent;
+    }
+
+    public function addMessagesSent(DirectMessage $messagesSent): self
+    {
+        if (!$this->messagesSent->contains($messagesSent)) {
+            $this->messagesSent[] = $messagesSent;
+            $messagesSent->setCreateBy($this);
         }
 
         return $this;
     }
 
-    public function removeDirectMessage(DirectMessage $directMessage): self
+    public function removeMessagesSent(DirectMessage $messagesSent): self
     {
-        if ($this->directMessages->removeElement($directMessage)) {
+        if ($this->messagesSent->removeElement($messagesSent)) {
             // set the owning side to null (unless already changed)
-            if ($directMessage->getCreatedBy() === $this) {
-                $directMessage->setCreatedBy(null);
+            if ($messagesSent->getCreateBy() === $this) {
+                $messagesSent->setCreateBy(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, DirectMessage>
+     */
+    public function getMessagesReceived(): Collection
+    {
+        return $this->messagesReceived;
+    }
+
+    public function addMessagesReceived(DirectMessage $messagesReceived): self
+    {
+        if (!$this->messagesReceived->contains($messagesReceived)) {
+            $this->messagesReceived[] = $messagesReceived;
+            $messagesReceived->setReceiver($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMessagesReceived(DirectMessage $messagesReceived): self
+    {
+        if ($this->messagesReceived->removeElement($messagesReceived)) {
+            // set the owning side to null (unless already changed)
+            if ($messagesReceived->getReceiver() === $this) {
+                $messagesReceived->setReceiver(null);
             }
         }
 
