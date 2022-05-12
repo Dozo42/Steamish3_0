@@ -19,22 +19,22 @@
     <div class="d-flex justify-content-center">
         <div class="col-12 col-md-3 col-lg-3 forumCard py-2 my-2 rounded ">
             <h4>Top Utilisateur</h4>
-            <p><i class="fa-solid fa-crown orange"></i>{{topUser.name}}</p>
+            <p><a href="{{ path('app_user', {'name': topUser.name }) }}"><i class="fa-solid fa-crown orange"></i>{{topUser.name}}</a></p>
         </div>
     </div>
 
     <div class="row mt-2 mb-4 justify-content-around">
         <div class="col-12 col-md-3 col-lg-3 forumCard py-2 my-2 rounded">
             <h4>Forum Top Tendance</h4>
-            <p>{{forumTendance.title}}</p>
+            <p><a href="{{path('app_forum_topic', {'id': forumTendance.id})}}">{{forumTendance.title}}</a></p>
         </div>
         <div class="col-12 col-md-3 col-lg-3 forumCard py-2 my-2 rounded">
             <h4>Forum Gold</h4>
-            <p>{{forumGold.title}}</p>
+            <p><a href="{{path('app_forum_topic', {'id': forumGold.id})}}">{{forumGold.title}}</a></p>
         </div>
         <div class="col-12 col-md-3 col-lg-3 forumCard py-2 my-2 rounded">
             <h4>Forum needAttention </h4>
-            <p>{{forumNeed.title}}</p>
+            <p><a href="{{path('app_forum_topic', {'id': forumNeed.id})}}">{{forumNeed.title}}</a></p>
         </div>
 
     </div>
