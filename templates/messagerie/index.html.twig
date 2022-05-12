@@ -18,7 +18,12 @@
             {% endif %}
 
             <div class="col-12">
-                <h2>Messages envoyés</h2>
+                <div class="d-flex justify-content-between align-items-center my-4">
+                    <h2 class="mb-1">Messages Envoyés : </h2>
+                    <div>
+                        <a class="btn btn-sm btn-outline-light" href="{# {{path('app_messagerie_sent_all')}} #}"><i class="fa-solid fa-plus"></i></a>
+                    </div>
+                </div>
                 {% for messageSent in messageSent %}
                     <div>
                         {{messageSent.content}}
@@ -27,7 +32,12 @@
             </div>
 
             <div class="col-12">
-                <h2>Messages reçus</h2>
+                <div class="d-flex justify-content-between align-items-center my-4">
+                    <h2 class="mb-1">Messages Reçus : </h2>
+                    <div>
+                        <a class="btn btn-sm btn-outline-light" href="{# {{path('app_messagerie_received_all')}} #}"><i class="fa-solid fa-plus"></i></a>
+                    </div>
+                </div>
                 {% for messageReceived in messageReceived %}
                     <div>
                         {{messageReceived.content}}
