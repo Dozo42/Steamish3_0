@@ -6,7 +6,23 @@
 
 <div class="container">
     <div class="row">
+
+        <div class="row mt-4">
+            <h2 class="mb-4">Envoyer un message</h2>
+            <div class="col-8">
+                {{form_start(form)}}
+                {{form_row(form.email)}}
+                {{form_row(form.content)}}
+                <button type="submit" class="btn btn-success">Envoyer</button>
+                {{form_end(form)}}
+            </div>
+        </div>
+
+        {% if error == true %}
+        <p>Utilisateur inexistant...</p>
+        {% endif %}
         {% if newMessages|length != 0 %}
+
         <div class="col-12 mt-4">
             <h2>Nouveaux messages</h2>
             {% for newMessage in newMessages %}
@@ -82,20 +98,6 @@
     </div>
 
     <hr>
-
-    <div class="row">
-        <div class="col-8">
-            {{form_start(form)}}
-            {{form_row(form.email)}}
-            {{form_row(form.content)}}
-            <button type="submit" class="btn btn-success">Envoyer</button>
-            {{form_end(form)}}
-        </div>
-    </div>
-
-    {% if error == true %}
-    <p>Utilisateur inexistant...</p>
-    {% endif %}
 </div>
 
 {% endblock %}
