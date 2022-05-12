@@ -2,7 +2,9 @@
 
 namespace App\Form;
 
+use App\Entity\Genre;
 use Doctrine\DBAL\Types\TextType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
@@ -36,6 +38,11 @@ class GameSearchType extends AbstractType
             'attr' => [
                 'placeholder' => 'Date de publication'
             ]
+        ])
+        ->add('genre', EntityType::class, [
+            'class' => Genre::class,
+            'choice_label' => 'name',
+            'label' => false
         ])
         ;
     }

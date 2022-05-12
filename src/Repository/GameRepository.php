@@ -165,6 +165,11 @@ class GameRepository extends ServiceEntityRepository
             $qb->andWhere('g.price <= :mavar')
             ->setParameter('mavar', $data['price']);
         }
+        if(isset($data['genre']) &&  $data['genre']){
+            $qb->join('g.genres', 'genre')
+            ->andWhere('genre = :mavar')
+            ->setParameter('mavar', $data['genre']);
+        }
 
         return $qb;
     }
