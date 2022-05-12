@@ -59,6 +59,9 @@ class Account implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'integer', nullable: true)]
     private $nbBanWord;
 
+    #[ORM\OneToMany(mappedBy: 'createdBy', targetEntity: DirectMessage::class)]
+    private $directMessages;
+
     public function __construct()
     {
         $this->libraries = new ArrayCollection();
@@ -66,6 +69,7 @@ class Account implements UserInterface, PasswordAuthenticatedUserInterface
         $this->wallet = 0.0;
         $this->topics = new ArrayCollection();
         $this->messages = new ArrayCollection();
+        $this->directMessages = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -365,6 +369,36 @@ class Account implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function incrementNbBanWord() {
         $this->nbBanWord += 1;
+    }
+
+    /**
+     * @return Collection<int, DirectMessage>
+     */
+    public function getDirectMessages(): Collection
+    {
+        return $this->directMessages;
+    }
+
+    public function addDirectMessage(DirectMessage $directMessage): self
+    {
+        if (!$this->directMessages->contains($directMessage)) {
+            $this->directMessages[] = $directMessage;
+            $directMessage->setCreatedBy($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDirectMessage(DirectMessage $directMessage): self
+    {
+        if ($this->directMessages->removeElement($directMessage)) {
+            // set the owning side to null (unless already changed)
+            if ($directMessage->getCreatedBy() === $this) {
+                $directMessage->setCreatedBy(null);
+            }
+        }
+
+        return $this;
     }
     
 }
