@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Message;
+use App\Form\ForumSearchType;
 use App\Form\MessageType;
 use App\Repository\ForumRepository;
 use App\Repository\MessageRepository;
@@ -32,6 +33,7 @@ class ForumController extends AbstractController
     public function index(Request $request): Response
     {
         $qb = $this->forumRepository->getQbAll();
+
         $pagination = $this->paginator->paginate(
             $qb,
             $request->query->getInt('page', 1),

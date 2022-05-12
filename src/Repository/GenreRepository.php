@@ -58,4 +58,14 @@ class GenreRepository extends ServiceEntityRepository
     public function getQbAll() {
         return $this->createQueryBuilder('g');
     }
+
+    public function updateQbByData($qb, $data) {
+
+        if(isset($data['name']) &&  $data['name']){
+            $qb->andWhere('g.name LIKE :mavar')
+            ->setParameter('mavar', '%'.$data['name'].'%');
+        }
+
+        return $qb;
+    }
 }

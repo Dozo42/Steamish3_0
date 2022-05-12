@@ -34,20 +34,7 @@ class AdminGameController extends AbstractController
         $form = $this->createForm(GameSearchType::class);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $data = $form->getData();
-dump($data);
-            if(isset($data['name']) &&  $data['name']){
-                $qb->andWhere('g.name = :mavar')
-                ->setParameter('mavar', $data['name']);
-            }
-            if(isset($data['publishedAt']) &&  $data['publishedAt']){
-                $qb->andWhere('g.publishedAt > :mavar')
-                ->setParameter('mavar',  $data['publishedAt']);
-            }
-            if(isset($data['price']) &&  $data['price']){
-                $qb->andWhere('g.price < :mavar')
-                ->setParameter('mavar', $data['price']);
-            }
+            $qb = $this->gameRepository->updateQbByData($qb, $form->getData());
         }
 
         $pagination = $this->paginator->paginate(
