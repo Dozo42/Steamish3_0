@@ -8,6 +8,7 @@ use App\Repository\AccountRepository;
 use App\Repository\DirectMessageRepository;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,7 +19,8 @@ class MessagerieController extends AbstractController
     public function __construct(
         private DirectMessageRepository $directMessageRepository,
         private AccountRepository $accountRepository,
-        private EntityManagerInterface $em
+        private EntityManagerInterface $em,
+        private PaginatorInterface $paginator
 
     )
     {
@@ -32,14 +34,14 @@ class MessagerieController extends AbstractController
         $account = $this->getUser();
 
         $newMessageEntities = $this->directMessageRepository->findBy(['hasBeenSeen' => false, 'receiver' => $account ]);
-        $newMessages = $newMessageEntities;
         
-        $messageReceivedEntities = $this->directMessageRepository->findBy(['hasBeenSeen' => true, 'receiver' => $account ], [], 50);
-        $messageSentEntities = $this->directMessageRepository->findBy(['createBy' => $account ], [], 50);
+        $messageReceivedEntities = $this->directMessageRepository->findBy(['hasBeenSeen' => true, 'receiver' => $account ], [], 10);
+        $messageSentEntities = $this->directMessageRepository->findBy(['createBy' => $account ], [], 10);
 
         foreach ($newMessageEntities as $newMessage) {
             $newMessage->setHasBeenSeen(true);
         }
+        $this->em->flush();
 
         $error = false;
         $directMessageEntity = new DirectMessage();
@@ -70,35 +72,45 @@ class MessagerieController extends AbstractController
             'form' => $form->createView(),
             'messageReceived' => $messageReceivedEntities,
             'messageSent' => $messageSentEntities,
-            'newMessages' => $newMessages,
+            'newMessages' => $newMessageEntities,
             'error' => $error
         ]);
     }
 
     #[Route('/messagerie/message/envoyer', name: 'app_messagerie_sent_all')]
-    public function showSent(): Response
+    public function showSent(Request $request): Response
     {
         /**@var Account $account */
         $account = $this->getUser();
 
-        $messageSentEntities = $this->directMessageRepository->findBy(['createBy' => $account ]);
+        $qb = $this->directMessageRepository->getQbSent($account);
+        $pagination = $this->paginator->paginate(
+            $qb,
+            $request->query->getInt('page', 1),
+            20
+        );
 
         return $this->render('messagerie/showSent.html.twig', [
-            'messagesSent' => $messageSentEntities
+            'pagination' => $pagination
         ]);
     }
 
 
     #[Route('/messagerie/message/recu', name: 'app_messagerie_received_all')]
-    public function showReceivd(): Response
+    public function showReceivd(Request $request): Response
     {
         /**@var Account $account */
         $account = $this->getUser();
 
-        $messageReceivedEntities = $this->directMessageRepository->findBy(['hasBeenSeen' => true, 'receiver' => $account ]);
+        $qb = $this->directMessageRepository->getQbReceived($account, true);
+        $pagination = $this->paginator->paginate(
+            $qb,
+            $request->query->getInt('page', 1),
+            20
+        );
 
         return $this->render('messagerie/showReceived.html.twig', [
-            'messagesReceived' => $messageReceivedEntities
+            'pagination' => $pagination
         ]);
     }
 }
