@@ -28,16 +28,28 @@ class MessagerieController extends AbstractController
     #[Route('/messagerie', name: 'app_messagerie')]
     public function index(Request $request): Response
     {
+        /**@var Account $account */
+        $account = $this->getUser();
+
+        $newMessageEntities = $this->directMessageRepository->findBy(['hasBeenSeen' => false, 'receiver' => $account ]);
+        $newMessages = $newMessageEntities;
+        
+        $messageReceivedEntities = $this->directMessageRepository->findBy(['hasBeenSeen' => true, 'receiver' => $account ], [], 50);
+        $messageSentEntities = $this->directMessageRepository->findBy(['createBy' => $account ], [], 50);
+
+        foreach ($newMessageEntities as $newMessage) {
+            $newMessage->setHasBeenSeen(true);
+        }
+
         $error = false;
         $directMessageEntity = new DirectMessage();
         $form = $this->createForm(DirectMessagerieType::class);
         $form->handleRequest($request);
-
+   
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
 
             $receiverEntity = $this->accountRepository->findOneBy(['email' => $data['email']]);
-
             if ($receiverEntity != null) {
 
                 $directMessageEntity->setReceiver($receiverEntity);
@@ -52,13 +64,13 @@ class MessagerieController extends AbstractController
             } else {
                 $error = true;
             }
-
-            
         }
-
 
         return $this->render('messagerie/index.html.twig', [
             'form' => $form->createView(),
+            'messageReceived' => $messageReceivedEntities,
+            'messageSent' => $messageSentEntities,
+            'newMessages' => $newMessages,
             'error' => $error
         ]);
     }

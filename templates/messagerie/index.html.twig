@@ -5,15 +5,36 @@
 {% block body %}
 
     <div class="container">
-        <h2>Messages envoyés</h2>
-        {% for messageSent in app.user.messagesSent %}
-            {{messageSent.content}}
-        {% endfor %}
+        <div class="row">
+            {% if newMessages|length != 0 %}
+                <div class="col-12">
+                    <h2>Nouveaux messages</h2>
+                    {% for newMessage in newMessages %}
+                        <div>
+                            {{newMessage.content}}
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
 
-        <h2>Messages reçus</h2>
-        {% for messageReceived in app.user.messagesReceived %}
-            {{messageReceived.content}}
-        {% endfor %}
+            <div class="col-12">
+                <h2>Messages envoyés</h2>
+                {% for messageSent in messageSent %}
+                    <div>
+                        {{messageSent.content}}
+                    </div>
+                {% endfor %}
+            </div>
+
+            <div class="col-12">
+                <h2>Messages reçus</h2>
+                {% for messageReceived in messageReceived %}
+                    <div>
+                        {{messageReceived.content}}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
 
         <hr>
 
