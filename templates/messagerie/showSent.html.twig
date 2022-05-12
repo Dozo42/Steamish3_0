@@ -1,0 +1,18 @@
+{% extends 'base-front.html.twig' %}
+
+{% block title %}Hello MessagerieController!{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <div class="row">
+            <h2>Tout vos messages envoyés : </h2>
+            {% for messageSent in messagesSent %}
+                <div class="col-12">
+                    {{messageSent.content}}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}
