@@ -2,49 +2,58 @@
 
 {% block title %}Admin : {{ game.name }}{% endblock %}
 
-{% block body %}<div class="container mt-4">
-    <nav class="m-2" aria-label="breadcrumb">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{ path('app_home') }}">Accueil</a></li>
-            <li class="breadcrumb-item"><a href="{{ path('app_admin_game') }}">Tout les jeux</a></li>
-            <li class="breadcrumb-item active" aria-current="page">{{game.name}}</li>
-        </ol>
-    </nav>
-    {# card du jeux #}
-    <div class="my-4">
-        <a class="btn btn-sm btn-outline-light mb-3 mt-2 " href="{{ path('app_admin_game_modify', {'slug': game.slug})}}"><i class="orange fa-solid fa-pencil"></i></a>
-        <a class="btn btn-sm btn-outline-light mb-3 mt-2 " href="" data-bs-toggle="modal" data-bs-target="#exampleModal{{game.id}}"><i class="red fa-solid fa-trash-can"></i></a>
-    </div>
-    <div class="card mx-auto mt-4 mb-4 col-12 border-2 rounded">
-        <div class="row g-0">
-            <div class="col-md-4 view">
-                <img src="{{ game.thumbnailCover}}" class="img-fluid" alt="{{ game.name }}">
-            </div>
-            <div class="col-md-8 view">
-                <div class="card-body">
-                    <h2 class="card-title">{{ game.name }}</h2>
-                    {% if game.publisher %}
-                        <a class="card-text" href='{{ path('app_admin_publisher_detail', {'slug':game.publisher.slug}) }}'>{{ game.publisher.name }}</a>
-                    {% endif %}
-                    <p class="card-text"><small class="text-muted">Publié le
-                        {{ game.publishedAt |date("m F Y") }}</small>
-                    </p>
-                    <h3 class="card-text">{{ game.price }}€</h3>
-                    <hr>
-                    <p class="card-text">{{ game.description | raw }}</p>
-                    <hr>
-                    <div class="d-flex">
-                        {% for genre in game.genres %}
-                        <a class="btn btn-sm btn-outline-light me-2 align-middle" href="{{ path('app_game_by_genre', {'slug': genre.slug}) }}">{{ genre.name }}</a>
-                        {% endfor %}
-                    </div>
-                    <hr>
-                    <div class="d-flex my-0">
-                        {% for langue in game.countries %}
-                        <div class="me-2">
-                            <a href="{{ path('app_game_by_langue', {'slug': langue.slug}) }}"><img src=" {{ langue.urlFlag }}" alt="{{ langue.nationality }}"></a>
+{% block body %}
+<div class="container mt-4">
+    <div class="col-10">
+        <nav class="m-2" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ path('app_home') }}">Accueil</a></li>
+                <li class="breadcrumb-item"><a href="{{ path('app_admin_game') }}">Tout les jeux</a></li>
+                <li class="breadcrumb-item active" aria-current="page">{{game.name}}</li>
+            </ol>
+        </nav>
+        {# card du jeux #}
+        <div class="my-4">
+            <a class="btn btn-sm btn-outline-light mb-3 mt-2 "
+                href="{{ path('app_admin_game_modify', {'slug': game.slug})}}"><i
+                    class="orange fa-solid fa-pencil"></i></a>
+            <a class="btn btn-sm btn-outline-light mb-3 mt-2 " href="" data-bs-toggle="modal"
+                data-bs-target="#exampleModal{{game.id}}"><i class="red fa-solid fa-trash-can"></i></a>
+        </div>
+        <div class="card mx-auto mt-4 mb-4 col-12 border-2 rounded">
+            <div class="row g-0">
+                <div class="col-md-4 view">
+                    <img src="{{ game.thumbnailCover}}" class="img-fluid" alt="{{ game.name }}">
+                </div>
+                <div class="col-md-8 view">
+                    <div class="card-body">
+                        <h2 class="card-title">{{ game.name }}</h2>
+                        {% if game.publisher %}
+                        <a class="card-text"
+                            href='{{ path('app_admin_publisher_detail', {'slug':game.publisher.slug}) }}'>{{ game.publisher.name }}</a>
+                        {% endif %}
+                        <p class="card-text"><small class="text-muted">Publié le
+                                {{ game.publishedAt |date("m F Y") }}</small>
+                        </p>
+                        <h3 class="card-text">{{ game.price }}€</h3>
+                        <hr>
+                        <p class="card-text">{{ game.description | raw }}</p>
+                        <hr>
+                        <div class="d-flex">
+                            {% for genre in game.genres %}
+                            <a class="btn btn-sm btn-outline-light me-2 align-middle"
+                                href="{{ path('app_game_by_genre', {'slug': genre.slug}) }}">{{ genre.name }}</a>
+                            {% endfor %}
                         </div>
-                        {% endfor %}
+                        <hr>
+                        <div class="d-flex my-0">
+                            {% for langue in game.countries %}
+                            <div class="me-2">
+                                <a href="{{ path('app_game_by_langue', {'slug': langue.slug}) }}"><img
+                                        src=" {{ langue.urlFlag }}" alt="{{ langue.nationality }}"></a>
+                            </div>
+                            {% endfor %}
+                        </div>
                     </div>
                 </div>
             </div>
@@ -52,10 +61,10 @@
     </div>
 </div>
 
-
-    <div class="modal fade" id="exampleModal{{game.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
+<div class="modal fade" id="exampleModal{{game.id}}" tabindex="-1" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Suppression</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -67,8 +76,8 @@
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Non</button>
                 <a href="{{ path('app_admin_game_delete', {'id': game.id}) }}" class="btn btn-primary">Supprimer !</a>
             </div>
-            </div>
         </div>
     </div>
+</div>
 
 {% endblock %}

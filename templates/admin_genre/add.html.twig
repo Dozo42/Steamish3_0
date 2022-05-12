@@ -4,22 +4,23 @@
 
 {% block body %}
 <div class="container my-4">
-    {# <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="{{ path('app_home') }}">Accueil</a></li>
-        <li class="breadcrumb-item"><a href="{{ path('app_user_index') }}">Utilisateurs</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Nouvel Utilisateur</li>
-    </ol> #}
-    
-    <div class="d-flex">
-        <h2 class="mb-3">Nouveau Genre</h2>
-    </div>
+    <div class="col-10">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ path('app_admin') }}">Accueil</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Nouveau Genre</li>
+        </ol>
 
-    <div class="col-4">
-        {{form_start(form)}}
+        <div class="d-flex">
+            <h2 class="mb-3">Nouveau Genre</h2>
+        </div>
+
+        <div class="col-4">
+            {{form_start(form)}}
             {{form_row(form.name)}}
             {{form_row(form.slug)}}
             <button type="submit" class="btn btn-success">Soumettre</button>
-        {{form_end(form)}}
+            {{form_end(form)}}
+        </div>
     </div>
 </div>
 {% endblock %}

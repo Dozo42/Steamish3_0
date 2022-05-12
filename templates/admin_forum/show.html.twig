@@ -3,7 +3,8 @@
 {% block title %}Admin : {{ forum.title }}{% endblock %}
 
 {% block body %}
-    <div class="container my-4">
+<div class="container my-4">
+    <div class="col-10">
         <nav class="m-2" aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ path('app_home') }}">Accueil</a></li>
@@ -35,10 +36,11 @@
             </tbody>
         </table>
     </div>
-
-    <div class="modal fade" id="exampleModal{{forum.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
+</div>
+<div class="modal fade" id="exampleModal{{forum.id}}" tabindex="-1" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Suppression</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -50,8 +52,8 @@
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Non</button>
                 {# <a href="{{ path('app_admin_publisher_delete', {'id': forum.id}) }}" class="btn btn-primary">Supprimer !</a> #}
             </div>
-            </div>
         </div>
     </div>
+</div>
 
 {% endblock %}
