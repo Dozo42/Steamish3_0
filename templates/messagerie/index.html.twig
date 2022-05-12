@@ -4,63 +4,75 @@
 
 {% block body %}
 
-    <div class="container">
-        <div class="row">
-            {% if newMessages|length != 0 %}
-                <div class="col-12">
-                    <h2>Nouveaux messages</h2>
-                    {% for newMessage in newMessages %}
-                        <div>
-                            {{newMessage.content}}
-                        </div>
-                    {% endfor %}
-                </div>
-            {% endif %}
-
-            <div class="col-12">
-                <div class="d-flex justify-content-between align-items-center my-4">
-                    <h2 class="mb-1">Messages Envoyés : </h2>
-                    <div>
-                        <a class="btn btn-sm btn-outline-light" href="{# {{path('app_messagerie_sent_all')}} #}"><i class="fa-solid fa-plus"></i></a>
-                    </div>
-                </div>
-                {% for messageSent in messageSent %}
-                    <div>
-                        {{messageSent.content}}
-                    </div>
-                {% endfor %}
+<div class="container">
+    <div class="row">
+        {% if newMessages|length != 0 %}
+        <div class="col-12">
+            <h2>Nouveaux messages</h2>
+            {% for newMessage in newMessages %}
+            <div>
+                {{newMessage.content}}
             </div>
-
-            <div class="col-12">
-                <div class="d-flex justify-content-between align-items-center my-4">
-                    <h2 class="mb-1">Messages Reçus : </h2>
-                    <div>
-                        <a class="btn btn-sm btn-outline-light" href="{# {{path('app_messagerie_received_all')}} #}"><i class="fa-solid fa-plus"></i></a>
-                    </div>
-                </div>
-                {% for messageReceived in messageReceived %}
-                    <div>
-                        {{messageReceived.content}}
-                    </div>
-                {% endfor %}
-            </div>
+            {% endfor %}
         </div>
-
-        <hr>
-
-        <div class="row">
-            <div class="col-8">
-                {{form_start(form)}}
-                {{form_row(form.email)}}
-                {{form_row(form.content)}}
-                    <input type="submit">
-                {{form_end(form)}}
-            </div>
-        </div>
-
-        {% if error == true %}
-            <p>Utilisateur inexistant...</p>
         {% endif %}
+
+        <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center my-4">
+                <h2 class="mb-1">Messages Envoyés : </h2>
+                <div>
+                    <a class="btn btn-sm btn-outline-light" href="{# {{path('app_messagerie_sent_all')}} #}"><i
+                            class="fa-solid fa-plus"></i></a>
+                </div>
+            </div>
+            {% for messageSent in messageSent %}
+
+       
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12 py-2">
+                    <div class="">
+                        <div class="ps-3 py-3 message">
+                            <div class="pe-4 d-flex justify-content-between">
+                                <p>Envoyé à <a href="{{ path('app_user', {'name': messageSent.receiver.name }) }}">{{messageSent.receiver.nickName}}</a> le {{messageSent.createdAt|date('d/m/y')}}</p>
+                            </div>
+                            <p class="pe-2">{{messageSent.content}}</p>
+                        </div>
+                    </div>
+                </div>
+         
+            {% endfor %}
+        </div>
+
+        <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center my-4">
+                <h2 class="mb-1">Messages Reçus : </h2>
+                <div>
+                    <a class="btn btn-sm btn-outline-light" href="{# {{path('app_messagerie_received_all')}} #}"><i
+                            class="fa-solid fa-plus"></i></a>
+                </div>
+            </div>
+            {% for messageReceived in messageReceived %}
+            <div>
+                {{messageReceived.content}}
+            </div>
+            {% endfor %}
+        </div>
     </div>
+
+    <hr>
+
+    <div class="row">
+        <div class="col-8">
+            {{form_start(form)}}
+            {{form_row(form.email)}}
+            {{form_row(form.content)}}
+            <input type="submit">
+            {{form_end(form)}}
+        </div>
+    </div>
+
+    {% if error == true %}
+    <p>Utilisateur inexistant...</p>
+    {% endif %}
+</div>
 
 {% endblock %}

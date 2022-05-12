@@ -1,15 +1,26 @@
 .comment-section {
     background-color: $bleuFonce;
 
-    
+
 
     .cardcomment {
         width: 100%;
         background-color: $bleuNuit;
         border-radius: 20px;
-        h6{
+
+        h6 {
             color: $orange;
         }
     }
+}
 
-  }
+.message {
+
+    width: 100%;
+    background-color: $bleuFonce;
+    border-radius: 20px;
+
+    h6 {
+        color: $orange;
+    }
+}
