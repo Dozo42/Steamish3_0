@@ -36,7 +36,7 @@ class AdminGameController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $qb = $this->gameRepository->updateQbByData($qb, $form->getData());
         }
-        dump($form->getData());
+        
         $pagination = $this->paginator->paginate(
             $qb,
             $request->query->getInt('page', 1),
