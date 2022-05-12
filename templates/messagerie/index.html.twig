@@ -5,30 +5,36 @@
 {% block body %}
 
     <div class="container">
-        <h2>Messages envoyés</h2>
-        
-        {% for messageSent in app.user.messagesSent %}
-        <div class="cardcomment">
-            <div class="ps-3 py-3">
-                <div class="pe-4 d-flex justify-content-between">
-                    <p>Envoyé à {{messageSent.receiver.name}} le {{messageSent.createdAt |  date('d/m/y') }}</p>
-                    
+        <div class="row">
+            {% if newMessages|length != 0 %}
+                <div class="col-12">
+                    <h2>Nouveaux messages</h2>
+                    {% for newMessage in newMessages %}
                         <div>
-                            <a href=""><i class="orange fa-solid fa-pencil"></i></a>
-                            <a href="" data-bs-toggle="modal" data-bs-target="#exampleModal{"><i class="red fa-solid fa-trash-can"></i></a>
+                            {{newMessage.content}}
                         </div>
-                    {
+                    {% endfor %}
                 </div>
-                <p class="pe-2"> {{messageSent.content}}</p>
+            {% endif %}
+
+            <div class="col-12">
+                <h2>Messages envoyés</h2>
+                {% for messageSent in messageSent %}
+                    <div>
+                        {{messageSent.content}}
+                    </div>
+                {% endfor %}
+            </div>
+
+            <div class="col-12">
+                <h2>Messages reçus</h2>
+                {% for messageReceived in messageReceived %}
+                    <div>
+                        {{messageReceived.content}}
+                    </div>
+                {% endfor %}
             </div>
         </div>
-           
-        {% endfor %}
-
-        <h2>Messages reçus</h2>
-        {% for messageReceived in app.user.messagesReceived %}
-            {{messageReceived.content}}
-        {% endfor %}
 
         <hr>
 
