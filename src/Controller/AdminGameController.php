@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Game;
+use App\Form\GameSearchType;
 use App\Form\GameType;
 use App\Repository\GameRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -27,6 +28,18 @@ class AdminGameController extends AbstractController
     public function index(Request $request): Response
     {
         $qb = $this->gameRepository->getQbAll();
+
+        $form = $this->createForm(GameSearchType::class);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $data = $form->getData();
+// dump($data);
+            if($data['name']){
+                $qb->andWhere('g.name = :mavar')
+                ->setParameter('mavar', $data['name']);
+            }
+        }
+
         $pagination = $this->paginator->paginate(
             $qb,
             $request->query->getInt('page', 1),
@@ -34,7 +47,8 @@ class AdminGameController extends AbstractController
         );
 
         return $this->render('admin_game/index.html.twig', [
-            'pagination' => $pagination
+            'pagination' => $pagination,
+            'form'=> $form->createView() 
         ]);
     }
     
