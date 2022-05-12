@@ -6,12 +6,14 @@ use App\Entity\Game;
 use App\Form\GameSearchType;
 use App\Form\GameType;
 use App\Repository\GameRepository;
+use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+
 
 class AdminGameController extends AbstractController
 {
@@ -33,10 +35,18 @@ class AdminGameController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
-// dump($data);
-            if($data['name']){
+dump($data);
+            if(isset($data['name']) &&  $data['name']){
                 $qb->andWhere('g.name = :mavar')
                 ->setParameter('mavar', $data['name']);
+            }
+            if(isset($data['publishedAt']) &&  $data['publishedAt']){
+                $qb->andWhere('g.publishedAt > :mavar')
+                ->setParameter('mavar',  $data['publishedAt']);
+            }
+            if(isset($data['price']) &&  $data['price']){
+                $qb->andWhere('g.price < :mavar')
+                ->setParameter('mavar', $data['price']);
             }
         }
 
