@@ -37,9 +37,13 @@ class ForumController extends AbstractController
             $request->query->getInt('page', 1),
             10
         );
+        $forumTendance = $this->forumRepository->getForumTendance();
+        $forumGold = $this->forumRepository->getForumGold();
 
         return $this->render('forum/index.html.twig', [
-            'pagination' => $pagination
+            'pagination' => $pagination,
+            'forumTendance' => $forumTendance,
+            'forumGold' => $forumGold
         ]);
     }
 

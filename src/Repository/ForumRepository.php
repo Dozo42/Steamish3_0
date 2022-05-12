@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Forum;
+use DateTime;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
@@ -46,6 +47,35 @@ class ForumRepository extends ServiceEntityRepository
             $this->_em->flush();
         }
     }
+
+    public function getForumTendance() {
+        return $this->createQueryBuilder('f')
+            ->join('f.topics', 't')
+            ->join('t.messages', 'm')
+            ->groupBy('f.title')
+            ->where('m.createdAt < :today')
+            ->andWhere('m.createdAt > :oneWeek')
+            ->orderBy('COUNT(m)', 'DESC')
+            ->setParameter('today', new DateTime())
+            ->setParameter('oneWeek', new DateTime('-1 week'))
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getSingleResult()
+            ;
+    }
+
+    public function getForumGold() {
+        return $this->createQueryBuilder('f')
+            ->join('f.topics', 't')
+            ->join('t.messages', 'm')
+            ->groupBy('f.title')
+            ->orderBy('COUNT(m)', 'DESC')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getSingleResult()
+            ;
+    }
+
 
     // /**
     //  * @return Forum[] Returns an array of Forum objects
