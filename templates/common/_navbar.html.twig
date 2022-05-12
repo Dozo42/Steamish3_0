@@ -17,7 +17,7 @@
           <a class="nav-link" href="{{ path('app_forum') }}">Forum</a>
         </li>
         {% if is_granted('ROLE_ADMIN') %}
-        <a class="nav-link" href="{{ path('app_admin_game') }}">Dashboard</a>
+        <a class="nav-link" href="{{ path('app_admin') }}">Dashboard</a>
         {% endif %}
 
         {% if app.user %}
