@@ -3,7 +3,9 @@
 namespace App\Repository;
 
 use App\Entity\Account;
+use App\Entity\Message;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -57,6 +59,17 @@ class AccountRepository extends ServiceEntityRepository
         ->getQuery()
         ->getResult()[0]
         ;
+    }
+
+    public function getMostActiveUser(){
+        return $this->createQueryBuilder('u')
+            ->join(Message::class, 'm', Join::WITH, 'm.createdBy = u')
+            ->groupBy('m.createdBy')
+            ->orderBy('COUNT(m)', 'DESC')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getSingleResult()
+            ;
     }
 
     public function getQbAll()

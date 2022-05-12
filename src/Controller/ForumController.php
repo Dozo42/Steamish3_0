@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Message;
 use App\Form\MessageType;
+use App\Repository\AccountRepository;
 use App\Repository\ForumRepository;
 use App\Repository\MessageRepository;
 use App\Repository\TopicRepository;
@@ -22,7 +23,8 @@ class ForumController extends AbstractController
         private PaginatorInterface $paginator,
         private TopicRepository $topicRepository,
         private MessageRepository $messageRepository,
-        private EntityManagerInterface $em
+        private EntityManagerInterface $em,
+        private AccountRepository $accountRepository
     )
     {
         
@@ -39,11 +41,17 @@ class ForumController extends AbstractController
         );
         $forumTendance = $this->forumRepository->getForumTendance();
         $forumGold = $this->forumRepository->getForumGold();
+        $forumNeed = $this->forumRepository->getNeedForum();
+        $topUser = $this->accountRepository->getMostActiveUser();
+
+        dump($topUser);
 
         return $this->render('forum/index.html.twig', [
             'pagination' => $pagination,
             'forumTendance' => $forumTendance,
-            'forumGold' => $forumGold
+            'forumGold' => $forumGold,
+            'forumNeed' => $forumNeed,
+            'topUser' => $topUser
         ]);
     }
 

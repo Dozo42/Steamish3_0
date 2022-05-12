@@ -76,6 +76,20 @@ class ForumRepository extends ServiceEntityRepository
             ;
     }
 
+    public function getNeedForum(){
+        return $this->createQueryBuilder('f')
+            ->join('f.topics', 't')
+            ->join('t.messages', 'm')
+            ->groupBy('f.title')
+            ->orderBy('COUNT(m)', 'ASC')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getSingleResult()
+            ;
+    }
+
+
+
 
     // /**
     //  * @return Forum[] Returns an array of Forum objects
