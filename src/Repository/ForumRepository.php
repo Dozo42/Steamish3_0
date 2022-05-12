@@ -89,6 +89,19 @@ class ForumRepository extends ServiceEntityRepository
     }
 
 
+    public function updateQbByData($qb, $data) {
+
+        if(isset($data['title']) &&  $data['title']){
+            $qb->andWhere('f.title LIKE :mavar')
+            ->setParameter('mavar', '%'.$data['title'].'%');
+        }
+        if(isset($data['createdAt']) &&  $data['createdAt']){
+            $qb->andWhere('f.createdAt > :mavar')
+            ->setParameter('mavar',  $data['createdAt']);
+        }
+
+        return $qb;
+    }
 
 
     // /**

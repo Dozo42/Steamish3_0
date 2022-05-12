@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Forum;
+use App\Form\ForumSearchType;
 use App\Form\ForumType;
 use App\Repository\ForumRepository;
 use App\Repository\TopicRepository;
@@ -30,6 +31,13 @@ class AdminForumController extends AbstractController
     public function index(Request $request): Response
     {
         $qb = $this->forumRepository->getQbAll();
+
+        $form = $this->createForm(ForumSearchType::class);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $qb = $this->forumRepository->updateQbByData($qb, $form->getData());
+        }
+
         $pagination = $this->paginator->paginate(
             $qb,
             $request->query->getInt('page', 1),
@@ -37,7 +45,8 @@ class AdminForumController extends AbstractController
         );
 
         return $this->render('admin_forum/index.html.twig', [
-            'pagination' => $pagination
+            'pagination' => $pagination,
+            'form' => $form->createView()
         ]);
     }
 

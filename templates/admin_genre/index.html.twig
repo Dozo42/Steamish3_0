@@ -18,6 +18,14 @@
             <a class="btn btn-sm btn-outline-light mb-3 mt-2 " href="{{ path('app_admin_genre_add')}}"><i
                     class="fa-solid fa-plus"></i></a>
         </div>
+        <div class="d-flex ">{{form_start(form)}}<div class="d-flex">
+                {{form_row(form.name)}}
+                <button type="submit" class="mb-4 ms-2 btn btn-success"><i
+                        class="fa-solid fa-magnifying-glass"></i></button>
+                <a class="mb-4 ms-2 btn btn-success" href="{{ path('app_admin_game')}}"><i
+                        class="fa-solid fa-xmark"></i></a>
+                {{form_end(form)}}</div>
+        </div>
         <table class="table table-dark table-hover table-striped border border-light border-2">
             <thead>
                 <tr>

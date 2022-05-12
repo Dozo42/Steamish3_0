@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Genre;
+use App\Form\GenreSearchType;
 use App\Form\GenreType;
 use App\Repository\GenreRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -28,6 +29,13 @@ class AdminGenreController extends AbstractController
     public function index(Request $request): Response
     {
         $qb = $this->genreRepository->getQbAll();
+
+        $form = $this->createForm(GenreSearchType::class);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $qb = $this->genreRepository->updateQbByData($qb, $form->getData());
+        }
+
         $pagination = $this->paginator->paginate(
             $qb,
             $request->query->getInt('page', 1),
@@ -35,7 +43,8 @@ class AdminGenreController extends AbstractController
         );
 
         return $this->render('admin_genre/index.html.twig', [
-            'pagination' => $pagination
+            'pagination' => $pagination,
+            'form' => $form->createView()
         ]);
         // return $this->render('admin_genre/index.html.twig', [
         //     'genres' => $this->genreRepository->findAll()

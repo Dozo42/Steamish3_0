@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Publisher;
+use App\Form\PublisherSearchType;
 use App\Form\PublisherType;
 use App\Repository\PublisherRepository;
 use DateTime;
@@ -28,6 +29,13 @@ class AdminPublisherController extends AbstractController
     public function index(Request $request): Response
     {
         $qb = $this->publisherRepository->getQbAll();
+
+        $form = $this->createForm(PublisherSearchType::class);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $qb = $this->publisherRepository->updateQbByData($qb, $form->getData());
+        }
+
         $pagination = $this->paginator->paginate(
             $qb,
             $request->query->getInt('page', 1),
@@ -35,7 +43,8 @@ class AdminPublisherController extends AbstractController
         );
 
         return $this->render('admin_publisher/index.html.twig', [
-            'pagination' => $pagination
+            'pagination' => $pagination,
+            'form' => $form->createView()
         ]);
         // return $this->render('admin_publisher/index.html.twig', [
         //     'publishers' => $this->publisherRepository->findAll()

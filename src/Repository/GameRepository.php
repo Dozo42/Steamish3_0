@@ -151,4 +151,22 @@ class GameRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('g');
     }
 
+    public function updateQbByData($qb, $data) {
+
+        if(isset($data['name']) &&  $data['name']){
+            $qb->andWhere('g.name LIKE :mavar')
+            ->setParameter('mavar', '%'.$data['name'].'%');
+        }
+        if(isset($data['publishedAt']) &&  $data['publishedAt']){
+            $qb->andWhere('g.publishedAt > :mavar')
+            ->setParameter('mavar',  $data['publishedAt']);
+        }
+        if(isset($data['price']) &&  $data['price']){
+            $qb->andWhere('g.price <= :mavar')
+            ->setParameter('mavar', $data['price']);
+        }
+
+        return $qb;
+    }
+
  }
