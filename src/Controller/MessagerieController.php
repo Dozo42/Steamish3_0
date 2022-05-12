@@ -74,4 +74,31 @@ class MessagerieController extends AbstractController
             'error' => $error
         ]);
     }
+
+    #[Route('/messagerie/message/envoyer', name: 'app_messagerie_sent_all')]
+    public function showSent(): Response
+    {
+        /**@var Account $account */
+        $account = $this->getUser();
+
+        $messageSentEntities = $this->directMessageRepository->findBy(['createBy' => $account ]);
+
+        return $this->render('messagerie/showSent.html.twig', [
+            'messagesSent' => $messageSentEntities
+        ]);
+    }
+
+
+    #[Route('/messagerie/message/recu', name: 'app_messagerie_received_all')]
+    public function showReceivd(): Response
+    {
+        /**@var Account $account */
+        $account = $this->getUser();
+
+        $messageReceivedEntities = $this->directMessageRepository->findBy(['hasBeenSeen' => true, 'receiver' => $account ]);
+
+        return $this->render('messagerie/showReceived.html.twig', [
+            'messagesReceived' => $messageReceivedEntities
+        ]);
+    }
 }
