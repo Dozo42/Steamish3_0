@@ -6,8 +6,23 @@
 
     <div class="container">
         <h2>Messages envoyés</h2>
+        
         {% for messageSent in app.user.messagesSent %}
-            {{messageSent.content}}
+        <div class="cardcomment">
+            <div class="ps-3 py-3">
+                <div class="pe-4 d-flex justify-content-between">
+                    <p>Envoyé à {{messageSent.receiver.name}} le {{messageSent.createdAt |  date('d/m/y') }}</p>
+                    
+                        <div>
+                            <a href=""><i class="orange fa-solid fa-pencil"></i></a>
+                            <a href="" data-bs-toggle="modal" data-bs-target="#exampleModal{"><i class="red fa-solid fa-trash-can"></i></a>
+                        </div>
+                    {
+                </div>
+                <p class="pe-2"> {{messageSent.content}}</p>
+            </div>
+        </div>
+           
         {% endfor %}
 
         <h2>Messages reçus</h2>
@@ -17,9 +32,15 @@
 
         <hr>
 
-        {{form_start(form)}}
-            <input type="submit">
-        {{form_end(form)}}
+        <div class="row">
+            <div class="col-8">
+                {{form_start(form)}}
+                {{form_row(form.email)}}
+                {{form_row(form.content)}}
+                    <input type="submit">
+                {{form_end(form)}}
+            </div>
+        </div>
 
         {% if error == true %}
             <p>Utilisateur inexistant...</p>
