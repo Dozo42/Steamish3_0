@@ -47,6 +47,22 @@ class DirectMessageRepository extends ServiceEntityRepository
         }
     }
 
+    public function getQbSent($account) {
+        return $this->createQueryBuilder('m')
+            ->where('m.createBy = :account')
+            ->setParameter('account', $account)
+            ;
+    }
+
+    public function getQbReceived($account, $hasBeenSeen) {
+        return $this->createQueryBuilder('m')
+            ->where('m.createBy = :account')
+            ->setParameter('account', $account)
+            ->andWhere('m.hasBeenSeen = :hasbeenseen')
+            ->setParameter('hasbeenseen', $hasBeenSeen)
+            ;
+    }
+
     // /**
     //  * @return DirectMessage[] Returns an array of DirectMessage objects
     //  */

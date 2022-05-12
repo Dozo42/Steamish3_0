@@ -7,12 +7,13 @@
     <div class="container">
         <div class="row">
             <h2>Tout vos messages envoyés : </h2>
-            {% for messageSent in messagesSent %}
+            {% for messageSent in pagination %}
                 <div class="col-12">
                     {{messageSent.content}}
                 </div>
             {% endfor %}
         </div>
+        {{knp_pagination_render(pagination)}}
     </div>
 
 {% endblock %}
