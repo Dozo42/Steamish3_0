@@ -6,11 +6,22 @@
 
     <div class="container">
         <div class="row">
-            <h2>Tout vos messages envoyés : </h2>
+            <h2 class="mt-4">Tout vos messages envoyés : </h2>
             {% for messageSent in pagination %}
-                <div class="col-12">
-                    {{messageSent.content}}
+
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 py-2">
+                <div class="">
+                    <div class="ps-3 py-3 message">
+                        <div class="pe-4 d-flex justify-content-between">
+                            <p>Envoyé à <a
+                                    href="{{ path('app_user', {'name': messageSent.receiver.name }) }}">{{messageSent.receiver.nickName}}</a>
+                                le {{messageSent.createdAt|date('d/m/y')}}</p>
+                        </div>
+                        <p class="pe-2">{{messageSent.content}}</p>
+                    </div>
                 </div>
+            </div>
+
             {% endfor %}
         </div>
         {{knp_pagination_render(pagination)}}
