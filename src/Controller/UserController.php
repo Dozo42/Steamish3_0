@@ -10,6 +10,7 @@ use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -117,7 +118,11 @@ class UserController extends AbstractController
 
                 if ($account->getAvatarFileName() != null) {
                     $pathToFile = $this->getParameter('avatar_directory').'/'.$account->getAvatarFileName();
-                    unlink($pathToFile);
+
+                    $fileSystem = new Filesystem();
+                    $fileSystem->remove($pathToFile);
+
+                    // unlink($pathToFile);
 
                 }
 
