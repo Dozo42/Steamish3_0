@@ -41,6 +41,7 @@ class GameSearchType extends AbstractType
         ])
         ->add('genre', EntityType::class, [
             'class' => Genre::class,
+            'required' => false,
             'choice_label' => 'name',
             'label' => false
         ])

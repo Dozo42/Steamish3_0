@@ -87,12 +87,12 @@ class PublisherRepository extends ServiceEntityRepository
     public function updateQbByData($qb, $data) {
 
         if(isset($data['name']) &&  $data['name']){
-            $qb->andWhere('g.name LIKE :mavar')
-            ->setParameter('mavar', '%'.$data['name'].'%');
+            $qb->andWhere('g.name LIKE :myname')
+            ->setParameter('myname', '%'.$data['name'].'%');
         }
         if(isset($data['createdAt']) &&  $data['createdAt']){
-            $qb->andWhere('g.createdAt > :mavar')
-            ->setParameter('mavar',  $data['createdAt']);
+            $qb->andWhere('g.createdAt > :mydate')
+            ->setParameter('mydate',  $data['createdAt']);
         }
 
         return $qb;

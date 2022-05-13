@@ -154,21 +154,21 @@ class GameRepository extends ServiceEntityRepository
     public function updateQbByData($qb, $data) {
 
         if(isset($data['name']) &&  $data['name']){
-            $qb->andWhere('g.name LIKE :mavar')
-            ->setParameter('mavar', '%'.$data['name'].'%');
+            $qb->andWhere('g.name LIKE :myname')
+            ->setParameter('myname', '%'.$data['name'].'%');
         }
         if(isset($data['publishedAt']) &&  $data['publishedAt']){
-            $qb->andWhere('g.publishedAt > :mavar')
-            ->setParameter('mavar',  $data['publishedAt']);
+            $qb->andWhere('g.publishedAt > :mydate')
+            ->setParameter('mydate',  $data['publishedAt']);
         }
         if(isset($data['price']) &&  $data['price']){
-            $qb->andWhere('g.price <= :mavar')
-            ->setParameter('mavar', $data['price']);
+            $qb->andWhere('g.price <= :myprice')
+            ->setParameter('myprice', $data['price']);
         }
         if(isset($data['genre']) &&  $data['genre']){
             $qb->join('g.genres', 'genre')
-            ->andWhere('genre = :mavar')
-            ->setParameter('mavar', $data['genre']);
+            ->andWhere('genre = :mygenre')
+            ->setParameter('mygenre', $data['genre']);
         }
 
         return $qb;

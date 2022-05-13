@@ -92,12 +92,12 @@ class ForumRepository extends ServiceEntityRepository
     public function updateQbByData($qb, $data) {
 
         if(isset($data['title']) &&  $data['title']){
-            $qb->andWhere('f.title LIKE :mavar')
-            ->setParameter('mavar', '%'.$data['title'].'%');
+            $qb->andWhere('f.title LIKE :myname')
+            ->setParameter('myname', '%'.$data['title'].'%');
         }
         if(isset($data['createdAt']) &&  $data['createdAt']){
-            $qb->andWhere('f.createdAt > :mavar')
-            ->setParameter('mavar',  $data['createdAt']);
+            $qb->andWhere('f.createdAt > :mydate')
+            ->setParameter('mydate',  $data['createdAt']);
         }
 
         return $qb;

@@ -62,8 +62,8 @@ class GenreRepository extends ServiceEntityRepository
     public function updateQbByData($qb, $data) {
 
         if(isset($data['name']) &&  $data['name']){
-            $qb->andWhere('g.name LIKE :mavar')
-            ->setParameter('mavar', '%'.$data['name'].'%');
+            $qb->andWhere('g.name LIKE :myname')
+            ->setParameter('myname', '%'.$data['name'].'%');
         }
 
         return $qb;
