@@ -27,6 +27,12 @@ Encore
         to: 'image/[path][name].[ext]'
     })
 
+
+    .copyFiles({
+        from: './assets/image',
+        to: 'image/[path][name].[ext]'
+    })
+
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()
 

@@ -6,7 +6,7 @@
 
 <div class="container">
     <div class="row">
-
+{% if app.user %}
         <div class="row mt-4">
             <h2 class="mb-4">Envoyer un message</h2>
             <div class="col-8">
@@ -99,5 +99,10 @@
 
     <hr>
 </div>
+{% else %}
+<a href="{{ path('app_login') }}">
+    <h2 class="text-center mt-4">Connectez-vous</h2>
+</a>
 
+{% endif %}
 {% endblock %}
