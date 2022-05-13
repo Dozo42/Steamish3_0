@@ -65,6 +65,9 @@ class Account implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'receiver', targetEntity: DirectMessage::class)]
     private $messagesReceived;
 
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $avatarFileName;
+
     public function __construct()
     {
         $this->libraries = new ArrayCollection();
@@ -440,6 +443,18 @@ class Account implements UserInterface, PasswordAuthenticatedUserInterface
                 $messagesReceived->setReceiver(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getAvatarFileName(): ?string
+    {
+        return $this->avatarFileName;
+    }
+
+    public function setAvatarFileName(?string $avatarFileName): self
+    {
+        $this->avatarFileName = $avatarFileName;
 
         return $this;
     }
