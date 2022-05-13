@@ -11,6 +11,11 @@
                 }) }}</b></a>
                     {% endif %}
                 </p>
+                {% if comment.account.avatarFileName != null %}
+                    <div class="small-avatar-container">
+                        <img src="{{asset('uploads/avatars/' ~ comment.account.avatarFileName)}}" alt="">
+                    </div>
+                {% endif %}
                 {# {% dump(comment)  %} #}
                 {% if comment.note %}
                     <div>

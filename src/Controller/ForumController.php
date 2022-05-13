@@ -46,8 +46,6 @@ class ForumController extends AbstractController
         $forumNeed = $this->forumRepository->getNeedForum();
         $topUser = $this->accountRepository->getMostActiveUser();
 
-        dump($topUser);
-
         return $this->render('forum/index.html.twig', [
             'pagination' => $pagination,
             'forumTendance' => $forumTendance,

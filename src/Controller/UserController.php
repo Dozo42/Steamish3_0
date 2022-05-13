@@ -4,18 +4,25 @@ namespace App\Controller;
 
 use App\Entity\Account;
 use App\Form\AccountType;
+use App\Form\AvatarAccountType;
 use App\Repository\AccountRepository;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 #[Route('/utilisateur')]
 class UserController extends AbstractController
 {
-    public function __construct(private AccountRepository $accountRepository)
+    public function __construct(
+        private AccountRepository $accountRepository,
+        private EntityManagerInterface $em
+        )
     {
         
     }
@@ -82,6 +89,47 @@ class UserController extends AbstractController
         
         return $this->render('user/showAccount.html.twig', [
             'account' => $this->accountRepository->getAccountAllDetails($name)
+        ]);
+    }
+
+    #[Route('/utilisateur/{name}/avatar', name: 'app_user_avatar')]
+    public function modifyAvatar(string $name, Request $request, SluggerInterface $slugger): Response
+    {
+        $account = $this->accountRepository->findOneBy(['name' => $name]);
+        $form = $this->createForm(AvatarAccountType::class, $account);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $avatarFile = $form->get('avatar')->getData();
+
+            if ($avatarFile) {
+                $originalFileName = pathinfo($avatarFile->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFileName = $slugger->slug($originalFileName);
+                $newFileName = $safeFileName.'-'.uniqid().'.'.$avatarFile->guessExtension();
+
+                try {
+                    $avatarFile->move(
+                        $this->getParameter('avatar_directory'),
+                        $newFileName
+                    );
+                } catch (FileException $e) {
+                }
+
+                if ($account->getAvatarFileName() != null) {
+                    $pathToFile = $this->getParameter('avatar_directory').'/'.$account->getAvatarFileName();
+                    unlink($pathToFile);
+
+                }
+
+                $account->setAvatarFileName($newFileName);
+                $this->em->flush();
+
+                return $this->redirectToRoute('app_user', ['name' => $account->getName()]);
+            }
+        }
+        
+        return $this->render('user/formAvatar.html.twig', [
+            'form' => $form->createView()
         ]);
     }
 

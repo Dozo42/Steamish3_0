@@ -61,3 +61,24 @@ a {
 .bleu-fonce{
   background-color: $bleuFonce;
 }
+
+.avatar-container {
+  width: 120px;
+
+    >img {
+      width: 100%;
+      height: 100%;
+      border-radius: 30%;
+      
+    }
+}
+
+.small-avatar-container {
+  width: 2.5rem;
+
+  >img {
+    width: 100%;
+    height: 100%;
+    border-radius: 30%;
+  }
+}

@@ -10,8 +10,16 @@
                 <li class="breadcrumb-item active" aria-current="page">{{account.name}}</li>
             </ol>
         </nav>
+        {% if app.user and app.user.id == account.id %}
+            <a class="btn btn-sm btn-outline-light mb-3 mt-2" href="{{path('app_user_avatar', {'name': account.name})}}">Modifier avatar</a>
+        {% endif %}
         <div class="row">
             <div class="col-12 account-card text-center">
+                {% if account.avatarFileName != null %}
+                    <div class="avatar-container">
+                        <img class="" src="{{asset('uploads/avatars/' ~ account.avatarFileName)}}" alt="">
+                    </div>
+                {% endif %}
                 <h1 class="m-0 pt-2">{{ account.name }}</h1>
                 <p class="mb-0"><small class="text-muted">{{ account.nickname }}</small></p> 
                 <p class="mb-0"><small class="text-muted">Inscrit depuis le {{ account.createdAt|date("m F Y") }}</small></p>

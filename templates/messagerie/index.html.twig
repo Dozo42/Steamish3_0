@@ -85,7 +85,7 @@
                     <div class="ps-3 py-3 message">
                         <div class="pe-4 d-flex justify-content-between">
                             <p>Envoyé par <a
-                                    href="{{ path('app_user', {'name': messageReceived.receiver.name }) }}">{{messageReceived.receiver.nickName}}</a>
+                                    href="{{ path('app_user', {'name': messageReceived.createBy.name }) }}">{{messageReceived.createBy.nickName}}</a>
                                 le {{messageReceived.createdAt|date('d/m/y')}}</p>
                         </div>
                         <p class="pe-2">{{messageReceived.content}}</p>
